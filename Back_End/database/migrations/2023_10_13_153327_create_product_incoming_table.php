@@ -16,8 +16,10 @@ return new class extends Migration
         Schema::create('product_incoming', function (Blueprint $table) {
             $table->id();
             $table->integer('product_id');
+            $table->integer('size_id');
+            $table->integer('color_id');
             $table->integer('quantity');
-            $table->integer('price');
+            $table->integer('unit_price');
             $table->integer('category_id');
             $table->date('incoming_date');
             $table->timestamps();
