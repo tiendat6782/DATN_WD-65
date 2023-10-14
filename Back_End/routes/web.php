@@ -16,3 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('layout.index');
 });
+Route::prefix('admin')->group(function () {
+    // Các route bên trong nhóm này sẽ có tiền tố 'admin'
+    Route::get('/product', [App\Http\Controllers\ProductsController::class, 'index']);
+    // ...
+});
