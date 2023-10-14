@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id');
             $table->date('order_date');
-            $table->integer('total');
+            $table->integer('total_amount');
             $table->tinyInteger('status');
             $table->timestamps();
         });
