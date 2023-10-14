@@ -14,5 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('layout.index');
+});
+Route::prefix('admin')->group(function () {
+    // Các route bên trong nhóm này sẽ có tiền tố 'admin'
+    Route::get('/product', [App\Http\Controllers\ProductsController::class, 'index']);
+    Route::match(['GET','POST'], '/product/add', [App\Http\Controllers\ProductsController::class, 'addProduct'])->name('route_add_product');
+    // ...
 });
