@@ -14,7 +14,7 @@
             <a class="nav-link" href="{{ route('route_add_product') }}">Add</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ url('admin/product') }}">List</a>
+            <a class="nav-link" href="{{ url('/product') }}">List</a>
           </li>
           
         </ul>
@@ -47,7 +47,11 @@
                 <td>{{ $p->size_id }}</td>
                 <td>{{ $p->color_id }}</td>
                 <td>{{ $p->total_quantity }}</td>
-                <td>Action</td>
+                <td>
+                  <button type="button" class="btn btn-danger"><a style="color: white;text-decoration: none" href="{{ route('route_delete_product',['id'=>$p->id]) }}">delete</a></button>
+                  <button type="button" class="btn btn-warning"><a style="color: white;text-decoration: none" href="{{ route('route_edit_product',['id'=>$p->id]) }}">edit</a></button>
+
+                </td>
             </tr>
             @endforeach
             

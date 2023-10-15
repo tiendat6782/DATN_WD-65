@@ -46,7 +46,7 @@
               <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                   <li class="nav-item">
-                    <a class="nav-link" href=""><h2>Product</h2></a>
+                    <a class="nav-link" href="{{ route('route_index_product') }}"><h2>Product</h2></a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href=""><h2>Category</h2></a>
@@ -63,7 +63,7 @@
             </div>
           </nav>
             <!-- Nội dung -->
-            {{-- @include('templates.errors') --}}
+            @include('layout.errors')
             @yield('content')
            
         </div>
@@ -76,9 +76,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('bootstrap/js/bootstrap.bundle.js') }}"></script>
     <script src="{{ asset('bootstrap/js/bootstrap.js') }}"></script>
-    <script src="{{ asset('libs/jquery/dist/jquery.min.js') }}"></script>
+    {{-- <script src="{{ asset('libs/jquery/dist/jquery.min.js') }}"></script>
   
-    <script src="{{ asset('libs/input-mask/jquery.inputmask.js') }}"></script>
+    <script src="{{ asset('libs/input-mask/jquery.inputmask.js') }}"></script> --}}
     @yield('script')
 </body>
 </html>

@@ -18,7 +18,9 @@ Route::get('/', function () {
 });
 Route::prefix('admin')->group(function () {
     // Các route bên trong nhóm này sẽ có tiền tố 'admin'
-    Route::get('/product', [App\Http\Controllers\ProductsController::class, 'index']);
+    Route::get('/product', [App\Http\Controllers\ProductsController::class, 'index'])->name('route_index_product');
     Route::match(['GET','POST'], '/product/add', [App\Http\Controllers\ProductsController::class, 'addProduct'])->name('route_add_product');
+    Route::match(['GET','POST'], '/product/delete/{id}', [App\Http\Controllers\ProductsController::class, 'deleteProduct'])->name('route_delete_product');
+    Route::match(['GET','POST'], '/product/edit/{id}', [App\Http\Controllers\ProductsController::class, 'editProduct'])->name('route_edit_product');
     // ...
 });
