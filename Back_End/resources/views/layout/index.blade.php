@@ -49,7 +49,7 @@
                     <a class="nav-link" href="{{ route('route_index_product') }}"><h2>Product</h2></a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href=""><h2>Category</h2></a>
+                    <a class="nav-link" href="{{ route('route_index_category') }}"><h2>Category</h2></a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href=""><h2>Customer</h2></a>
