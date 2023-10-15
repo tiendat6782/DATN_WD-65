@@ -20,8 +20,8 @@ return new class extends Migration
             $table->text('description');
             $table->text('image');
             $table->integer('category_id');
-            $table->integer('size_id');
-            $table->integer('color_id');
+            $table->integer('size_id')->default(2);
+            $table->integer('color_id')->default(3);
             $table->integer('total_quantity');
             $table->timestamps();
         });

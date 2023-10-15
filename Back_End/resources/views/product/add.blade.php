@@ -18,6 +18,26 @@
             @endforeach
            </select>
     </div>
+    <div class="mb-3">
+        
+        <label class="form-label">Size_ID</label>
+        <select class="form-select" name="category_id" id="category" aria-label="Default select example">
+            @foreach($size as $s)
+            <option value="{{ $s->id }}" name="category_id">{{ $s->name }}</option>
+            
+            @endforeach
+           </select>
+    </div>
+    <div class="mb-3">
+        
+        <label class="form-label">Color_ID</label>
+        <select class="form-select" name="category_id" id="category" aria-label="Default select example">
+            @foreach($color as $co)
+            <option value="{{ $co->id }}" name="category_id">{{ $co->name }}</option>
+            
+            @endforeach
+           </select>
+    </div>
 
     <div class="mb-3">
         <label class="form-label">Description</label>

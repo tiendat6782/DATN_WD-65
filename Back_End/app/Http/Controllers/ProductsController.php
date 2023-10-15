@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Color;
 use App\Models\Products;
+use App\Models\Size;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -19,22 +21,23 @@ class ProductsController extends Controller
     }
     public function addProduct(Request $request){
         $categories = Category::all();
+        $size = Size::all();
+        $color = Color::all();
         if($request->isMethod('POST')){
-            $params = $request->except('_token');
+            // $params = $request->except('_token');
             if($request->hasFile('image') && $request->file('image')->isValid()){
                 $params['image'] = uploadFile("hinh", $request->file('image'));
 
             }
             
-            $product = Products::create($params);
-            // dd(123);
-            // die;
+            $product = Products::create($request->except('_token'));
+            
             if($product->id){
                 Session::flash('success', " Thêm mới sản phẩm thành công");
                 return redirect()->route('route_add_product');
             }
         }
-        return view('product.add', compact('categories'));
+        return view('product.add', compact('categories','size','color'));
     }
     public function deleteProduct($id){
         Products::where('id', $id)->delete();
