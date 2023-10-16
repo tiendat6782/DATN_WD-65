@@ -18,6 +18,7 @@ Route::get('/', function () {
     return view('layout.index');
 });
 
+
 Route::prefix('admin')->group(function () {
     Route::prefix('products')->controller(ProductController::class)->group(function () {
         Route::get('/', 'index')->name('admin.products.index');
@@ -28,3 +29,4 @@ Route::prefix('admin')->group(function () {
         Route::get('/destroy/{id}', 'destroy')->name('admin.products.destroy');
     });
 });
+
