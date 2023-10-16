@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,9 +17,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('layout.index');
 });
+
+
 Route::prefix('admin')->group(function () {
-    // Các route bên trong nhóm này sẽ có tiền tố 'admin'
-    Route::get('/product', [App\Http\Controllers\ProductsController::class, 'index']);
-    Route::match(['GET','POST'], '/product/add', [App\Http\Controllers\ProductsController::class, 'addProduct'])->name('route_add_product');
-    // ...
+    Route::prefix('products')->controller(ProductController::class)->group(function () {
+        Route::get('/', 'index')->name('admin.products.index');
+        Route::get('create', 'create')->name('admin.products.create');
+        Route::post('store', 'store')->name('admin.products.store');
+        Route::get('/edit/{id}', 'edit')->name('admin.products.edit');
+        Route::post('/update/{id}', 'update')->name('admin.products.update');
+        Route::get('/destroy/{id}', 'destroy')->name('admin.products.destroy');
+    });
 });
+
