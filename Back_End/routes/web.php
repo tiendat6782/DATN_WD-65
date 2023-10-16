@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +29,24 @@ Route::prefix('admin')->group(function () {
         Route::get('/edit/{id}', 'edit')->name('admin.products.edit');
         Route::post('/update/{id}', 'update')->name('admin.products.update');
         Route::get('/destroy/{id}', 'destroy')->name('admin.products.destroy');
+    });
+    //USER
+    Route::prefix('users')->controller(UserController::class)->group(function () {
+        Route::get('/', 'index')->name('admin.users.index');
+        Route::get('create', 'create')->name('admin.users.create');
+        Route::post('store', 'store')->name('admin.users.store');
+        Route::get('/edit/{id}', 'edit')->name('admin.users.edit');
+        Route::post('/update/{id}', 'update')->name('admin.users.update');
+        Route::get('/destroy/{id}', 'destroy')->name('admin.users.destroy');
+    });
+    //COLOR
+    Route::prefix('colors')->controller(ColorController::class)->group(function () {
+        Route::get('/', 'index')->name('admin.colors.index');
+        Route::get('create', 'create')->name('admin.colors.create');
+        Route::post('store', 'store')->name('admin.colors.store');
+        Route::get('/edit/{id}', 'edit')->name('admin.colors.edit');
+        Route::post('/update/{id}', 'update')->name('admin.colors.update');
+        Route::get('/destroy/{id}', 'destroy')->name('admin.colors.destroy');
     });
 });
 
