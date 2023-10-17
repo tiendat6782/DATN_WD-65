@@ -48,5 +48,14 @@ Route::prefix('admin')->group(function () {
         Route::post('/update/{id}', 'update')->name('admin.colors.update');
         Route::get('/destroy/{id}', 'destroy')->name('admin.colors.destroy');
     });
+    //SIZE
+    Route::prefix('sizes')->controller(ColorController::class)->group(function () {
+        Route::get('/', 'index')->name('admin.sizes.index');
+        Route::get('create', 'create')->name('admin.sizes.create');
+        Route::post('store', 'store')->name('admin.sizes.store');
+        Route::get('/edit/{id}', 'edit')->name('admin.sizes.edit');
+        Route::post('/update/{id}', 'update')->name('admin.sizes.update');
+        Route::get('/destroy/{id}', 'destroy')->name('admin.sizes.destroy');
+    });
 });
 
