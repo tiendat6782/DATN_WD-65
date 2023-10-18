@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -49,7 +50,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/destroy/{id}', 'destroy')->name('admin.colors.destroy');
     });
     //SIZE
-    Route::prefix('sizes')->controller(ColorController::class)->group(function () {
+    Route::prefix('sizes')->controller(SizeController::class)->group(function () {
         Route::get('/', 'index')->name('admin.sizes.index');
         Route::get('create', 'create')->name('admin.sizes.create');
         Route::post('store', 'store')->name('admin.sizes.store');
