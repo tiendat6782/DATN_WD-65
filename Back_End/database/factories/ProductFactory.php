@@ -21,10 +21,10 @@ class ProductFactory extends Factory
             'price' => $this->faker->randomFloat(2, 10, 1000),
             'description' => $this->faker->paragraph(2),
             'image' => fake()->imageUrl(),
-            'category_id' => $this->faker->numberBetween(1,10),
-            'size_id' => $this->faker->numberBetween(1,10),
-            'color_id' => $this->faker->numberBetween(1,10),
-            'total_quantity' => $this->faker->numberBetween(1,10),
+            'category_id' => $this->faker->numberBetween(1, 5),
+            'size_id' => $this->faker->numberBetween(1, 5),
+            'color_id' => $this->faker->numberBetween(1, 5),
+            'total_quantity' => $this->faker->numberBetween(1, 10),
         ];
     }
 }
