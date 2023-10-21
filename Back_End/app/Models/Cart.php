@@ -10,4 +10,24 @@ class Cart extends Model
     use HasFactory;
     protected $table = 'cart';
 
+    public function getUs()
+    {
+        $users = User::find($this->user_id);
+        if ($users) {
+            return $users->name;
+        } else {
+            return "Empty";
+        }
+    }
+    public function getPro()
+    {
+        $products = User::find($this->product_id);
+        if ($products) {
+            return $products->name;
+        } else {
+            return "Empty";
+        }
+    }
+
 }
+

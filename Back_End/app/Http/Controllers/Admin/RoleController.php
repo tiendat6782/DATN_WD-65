@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\Category;
+use App\Models\Role;
 
-class CategoryController extends Controller
+class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        return  view('admin.category.index', compact('categories'));
+        $roles = Role::all();
+        return  view('admin.role.index', compact('roles'));
     }
 
     /**
@@ -27,7 +27,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.category.create');
+        return view('admin.role.create');
     }
 
     /**
@@ -41,12 +41,13 @@ class CategoryController extends Controller
         // $request->validate();
 
 
-        DB::table('categories')->insert(
+        DB::table('roles')->insert(
             [
                 "name" => $request->name,
+                "description" => $request->description,
             ]
         );
-        return redirect()->route('admin.categories.index')->with(['msg' => 'theem thanh cong']);
+        return redirect()->route('admin.roles.index')->with(['msg' => 'theem thanh cong']);
     }
 
     /**
@@ -68,8 +69,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $categories = DB::table('categories')->where('id', $id)->first();
-        return view('admin.category.update', compact('categories'));
+        $roles = DB::table('roles')->where('id', $id)->first();
+        return view('admin.role.update', compact('roles'));
     }
 
     /**
@@ -81,10 +82,11 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        DB::table('categories')->where('id', $id)->update([
+        DB::table('roles')->where('id', $id)->update([
             "name" => $request->name,
+            "description" => $request->description,
         ]);
-        return redirect()->route('admin.categories.index')->with(['msg' => 'Sửa thành công!']);
+        return redirect()->route('admin.roles.index')->with(['msg' => 'Sửa thành công!']);
     }
 
     /**
@@ -96,8 +98,8 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         if ($id) {
-            DB::table('categories')->where('id', $id)->delete();
-            return redirect()->route('admin.categories.index')->with(['msg' => 'Xoa thanh cong ' . $id]);
+            DB::table('roles')->where('id', $id)->delete();
+            return redirect()->route('admin.roles.index')->with(['msg' => 'Xoa thanh cong ' . $id]);
         }
     }
 }

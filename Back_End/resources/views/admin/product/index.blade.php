@@ -32,14 +32,14 @@
                        <td>{{$product->getColor()}}</td>
                        <td>{{$product->total_quantity}}</td>
                        <td>
-                        <a href="{{ route('admin.products.edit',['id'=>$product->id]) }}" class="btn btn-warning" >Sửa</a>|
+                        <a href="{{ route('admin.products.edit',['id'=>$product->id]) }}" class="btn btn-warning" >Sửa</a>
                         <a onclick="return confirm('Bạn có muốn xoá sản phẩm này không?')" href="{{ route('admin.products.destroy',['id'=>$product->id]) }}" class="btn btn-danger" >Xoá</a>
-                        
+
                        </td>
                     </tr>
                 @endforeach
             @else
-                
+
             @endif
         @endisset
     </table>

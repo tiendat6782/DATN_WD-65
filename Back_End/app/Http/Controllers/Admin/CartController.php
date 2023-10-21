@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\Category;
+use App\Models\Product;
+use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 
-class CategoryController extends Controller
+class CartController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +19,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        return  view('admin.category.index', compact('categories'));
+        $carts = Cart::all();
+        return  view('admin.cart.index', compact('carts'));
     }
 
     /**
@@ -27,7 +30,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.category.create');
+        $users = User::all();
+        $products = Product::all();
+        return view('admin.cart.create', compact(['users', 'products']));
     }
 
     /**
@@ -41,12 +46,14 @@ class CategoryController extends Controller
         // $request->validate();
 
 
-        DB::table('categories')->insert(
+        DB::table('cart')->insert(
             [
-                "name" => $request->name,
+                "user_id" => $request->user_id,
+                "product_id" => $request->product_id,
+                "quantity" => $request->quantity,
             ]
         );
-        return redirect()->route('admin.categories.index')->with(['msg' => 'theem thanh cong']);
+        return redirect()->route('admin.carts.index')->with(['msg' => 'theem thanh cong']);
     }
 
     /**
@@ -68,8 +75,10 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $categories = DB::table('categories')->where('id', $id)->first();
-        return view('admin.category.update', compact('categories'));
+        $users = User::all();
+        $products = Product::all();
+        $carts = DB::table('cart')->where('id', $id)->first();
+        return view('admin.cart.update', compact('carts', 'users', 'products'));
     }
 
     /**
@@ -81,10 +90,12 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        DB::table('categories')->where('id', $id)->update([
-            "name" => $request->name,
+        DB::table('cart')->where('id', $id)->update([
+            "user_id" => $request->user_id,
+            "product_id" => $request->product_id,
+            "quantity" => $request->quantity,
         ]);
-        return redirect()->route('admin.categories.index')->with(['msg' => 'Sửa thành công!']);
+        return redirect()->route('admin.carts.index')->with(['msg' => 'Sửa thành công!']);
     }
 
     /**
@@ -96,8 +107,8 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         if ($id) {
-            DB::table('categories')->where('id', $id)->delete();
-            return redirect()->route('admin.categories.index')->with(['msg' => 'Xoa thanh cong ' . $id]);
+            DB::table('cart')->where('id', $id)->delete();
+            return redirect()->route('admin.carts.index')->with(['msg' => 'Xoa thanh cong ' . $id]);
         }
     }
 }
