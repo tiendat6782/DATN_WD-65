@@ -21,6 +21,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
+        $tille = "Product";
         return  view('admin.product.index', compact('products'));
     }
 
