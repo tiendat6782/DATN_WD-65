@@ -25,7 +25,12 @@ Route::get('/', function () {
 });
 
 
+
 Route::prefix('admin')->group(function () {
+    Route::get('/', function () {
+        return view('admin.dashboard');
+    })->name('admin.index');
+
     Route::prefix('products')->controller(ProductController::class)->group(function () {
         Route::get('/', 'index')->name('admin.products.index');
         Route::get('create', 'create')->name('admin.products.create');
