@@ -39,7 +39,17 @@ Route::prefix('admin')->group(function () {
         Route::get('/edit/{id}', 'edit')->name('admin.users.edit');
         Route::post('/update/{id}', 'update')->name('admin.users.update');
         Route::get('/destroy/{id}', 'destroy')->name('admin.users.destroy');
+        
     });
+
+    Route::prefix('users')->name('admin.users.')->group(function () {
+    Route::get('/', [UserController::class, 'index'])->name('index');
+    Route::get('create', [UserController::class, 'create'])->name('create');
+    Route::post('store', [UserController::class, 'store'])->name('store');
+    Route::get('edit/{id}', [UserController::class, 'edit'])->name('edit');
+    Route::post('update/{id}', [UserController::class, 'update'])->name('update');
+    Route::get('destroy/{id}', [UserController::class, 'destroy'])->name('destroy');
+});
     //COLOR
     Route::prefix('colors')->controller(ColorController::class)->group(function () {
         Route::get('/', 'index')->name('admin.colors.index');
