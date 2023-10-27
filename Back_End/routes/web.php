@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\CartController;
+use App\Http\Controllers\Admin\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -92,6 +93,15 @@ Route::prefix('admin')->group(function () {
         Route::get('/edit/{id}', 'edit')->name('admin.carts.edit');
         Route::post('/update/{id}', 'update')->name('admin.carts.update');
         Route::get('/destroy/{id}', 'destroy')->name('admin.carts.destroy');
+    });
+    //REVIEW
+    Route::prefix('reviews')->controller(ReviewController::class)->group(function () {
+        Route::get('/', 'index')->name('admin.reviews.index');
+        Route::get('create', 'create')->name('admin.reviews.create');
+        Route::post('store', 'store')->name('admin.reviews.store');
+        Route::get('/edit/{id}', 'edit')->name('admin.reviews.edit');
+        Route::post('/update/{id}', 'update')->name('admin.reviews.update');
+        Route::get('/destroy/{id}', 'destroy')->name('admin.reviews.destroy');
     });
 });
 

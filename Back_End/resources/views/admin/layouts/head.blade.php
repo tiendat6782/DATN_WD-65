@@ -102,8 +102,38 @@
                       <div>Categories</div>
                   </a>
               </li>
+              <li class="menu-item">
+                  <a href="{{ route('admin.colors.index') }}"  class="menu-link">
+                      <i class="menu-icon fa-brands fa-product-hunt"></i>
+                      <div>Color</div>
+                  </a>
+              </li>
+              <li class="menu-item">
+                  <a href="{{ route('admin.carts.index') }}"  class="menu-link">
+                      <i class="menu-icon fa-brands fa-product-hunt"></i>
+                      <div>Cart</div>
+                  </a>
+              </li>
+              <li class="menu-item">
+                  <a href="{{ route('admin.sizes.index') }}"  class="menu-link">
+                      <i class="menu-icon fa-brands fa-product-hunt"></i>
+                      <div>Size</div>
+                  </a>
+              </li>
+              <li class="menu-item">
+                  <a href="{{ route('admin.roles.index') }}"  class="menu-link">
+                      <i class="menu-icon fa-brands fa-product-hunt"></i>
+                      <div>Role</div>
+                  </a>
+              </li>
+              <li class="menu-item">
+                  <a href="{{ route('admin.reviews.index') }}"  class="menu-link">
+                      <i class="menu-icon fa-brands fa-product-hunt"></i>
+                      <div>Review</div>
+                  </a>
+              </li>
             <li class="menu-item">
-              <a href="" class="menu-link">
+              <a href="{{ route('admin.users.index') }}" class="menu-link">
                 <i class="menu-icon fa-regular fa-user"></i>
                 <div>User</div>
               </a>
