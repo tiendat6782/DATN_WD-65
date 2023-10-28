@@ -8,12 +8,11 @@
             <th>Price</th>
             <th>Description</th>
             <th>Image</th>
-            <th>Category_id</th>
-            <th>Size_id</th>
-            <th>Color_id</th>
-            <th>Total_quantity</th>
+            <th>...</th>    
             <th>
-                <a href="{{ route('admin.products.create') }}" class="btn btn-primary">Them</a>
+                <div class="text-center">
+                    <a href="{{ route('admin.products.create') }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i></a>
+                </div>            
             </th>
         </thead>
         @isset($products)
@@ -22,19 +21,19 @@
                     <tr>
                        <td>{{$product->id}}</td>
                        <td>{{$product->name}}</td>
-                       <td>{{$product->price}}</td>
+                       <td>{{$product->price}} $</td>
                        <td>{{$product->limitDescription()}}</td>
                        <td>
-                        <img src="{{ asset('storage/'.$product->image) }}" width="100px" alt="">
+                        <img src="{{ asset('storage/'.$product->image) }}" width="200px" alt="">
                         </td>
-                       <td>{{$product->getCate() }}</td>
-                       <td>{{$product->getSize()}}</td>
-                       <td>{{$product->getColor()}}</td>
-                       <td>{{$product->total_quantity}}</td>
                        <td>
-                        <a href="{{ route('admin.products.edit',['id'=>$product->id]) }}" class="btn btn-warning" >Sửa</a>
-                        <a onclick="return confirm('Bạn có muốn xoá sản phẩm này không?')" href="{{ route('admin.products.destroy',['id'=>$product->id]) }}" class="btn btn-danger" >Xoá</a>
-
+                        <a href="">Xem chi tiết</a>
+                       </td>
+                       <td>                      
+                        <div class="text-center">
+                            <a href="{{ route('admin.products.edit',['id'=>$product->id]) }}" class="text-warning" ><i class="fa-solid fa-pen-to-square"></i></a>
+                        <a onclick="return confirm('Bạn có muốn xoá sản phẩm này không?')" href="{{ route('admin.products.destroy',['id'=>$product->id]) }}" class="text-danger" ><i class="fa-solid fa-trash"></i></a>
+                        </div>
                        </td>
                     </tr>
                 @endforeach

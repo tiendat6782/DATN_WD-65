@@ -1,7 +1,7 @@
 @extends('admin.layouts.layout')
 
 @section('contain')
-    <div class="container mt-2 col-xl-8">
+    <div class="container mt-2 ">
         <form action="{{ route('admin.categories.update',['id' => $categories->id]) }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="mt-2">
