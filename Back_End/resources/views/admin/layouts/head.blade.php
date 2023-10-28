@@ -132,6 +132,12 @@
                       <div>Review</div>
                   </a>
               </li>
+              <li class="menu-item">
+                  <a href="{{ route('admin.attributes.index') }}"  class="menu-link">
+                      <i class="menu-icon fa-brands fa-product-hunt"></i>
+                      <div>Attributes</div>
+                  </a>
+              </li>
             <li class="menu-item">
               <a href="{{ route('admin.users.index') }}" class="menu-link">
                 <i class="menu-icon fa-regular fa-user"></i>

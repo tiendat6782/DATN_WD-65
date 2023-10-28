@@ -10,4 +10,31 @@ class Attribute extends Model
     use HasFactory;
     protected $table = 'attributes';
 
+    public function getPro()
+    {
+        $product = Product::find($this->product_id);
+        if ($product) {
+            return $product->name;
+        } else {
+            return "Empty";
+        }
+    }
+    public function getSize()
+    {
+        $size = Size::find($this->size_id);
+        if ($size) {
+            return $size->name;
+        } else {
+            return "Empty";
+        }
+    }
+    public function getCol()
+    {
+        $color = Color::find($this->color_id);
+        if ($color) {
+            return $color->name;
+        } else {
+            return "Empty";
+        }
+    }
 }
