@@ -1,7 +1,7 @@
 @extends('admin.layouts.layout')
 
 @section('contain')
-    <div class="container mt-2 col-xl-8">
+    <div class="container mt-2 ">
         <form action="{{ route('admin.products.update',['id' => $products->id]) }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="mt-2">
@@ -20,7 +20,6 @@
                 <label for="">Image</label>
                 @if ($products->image)
                 <input type="file" name="image" id="" class="form-control" value="{{ $products->image }}">
-                    
                 @endif
             </div>
             <div class="mt-2">
