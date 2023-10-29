@@ -8,7 +8,7 @@
         <th>Product ID</th>
         <th>Quantity</th>
         <th>
-            <a href="{{ route('admin.carts.create') }}" class="btn btn-primary">Them</a>
+            <a href="{{ route('admin.carts.create') }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i></a>
         </th>
         </thead>
         @isset($carts)
@@ -20,8 +20,8 @@
                         <td>{{$carts->getPro() }}</td>
                         <td>{{$carts->quantity}}</td>
                         <td>
-                            <a href="{{ route('admin.carts.edit',['id'=>$carts->id]) }}" class="btn btn-warning" >Sửa</a>
-                            <a onclick="return confirm('Bạn có muốn xoá đơn hàng này không?')" href="{{ route('admin.carts.destroy',['id'=>$carts->id]) }}" class="btn btn-danger" >Xoá</a>
+                            <a href="{{ route('admin.carts.edit',['id'=>$carts->id]) }}" class="btn btn-warning" ><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a onclick="return confirm('Bạn có muốn xoá đơn hàng này không?')" href="{{ route('admin.carts.destroy',['id'=>$carts->id]) }}" class="btn btn-danger" ><i class="fa-solid fa-trash"></i></a>
 
                         </td>
                     </tr>
