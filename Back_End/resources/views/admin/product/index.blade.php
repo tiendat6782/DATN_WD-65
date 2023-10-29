@@ -27,12 +27,13 @@
                         <img src="{{ asset('storage/'.$product->image) }}" width="200px" alt="">
                         </td>
                        <td>
-                        <a href="">Xem chi tiết</a>
+                        <a href="{{ route('admin.products.show',['id'=>$product->id]) }}">Chi tiết</a>
                        </td>
+                       
                        <td>                      
                         <div class="text-center">
                             <a href="{{ route('admin.products.edit',['id'=>$product->id]) }}" class="text-warning" ><i class="fa-solid fa-pen-to-square"></i></a>
-                        <a onclick="return confirm('Bạn có muốn xoá sản phẩm này không?')" href="{{ route('admin.products.destroy',['id'=>$product->id]) }}" class="text-danger" ><i class="fa-solid fa-trash"></i></a>
+                            <a onclick="return confirm('Bạn có muốn xoá sản phẩm này không?')" href="{{ route('admin.products.destroy',['id'=>$product->id]) }}" class="text-danger" ><i class="fa-solid fa-trash"></i></a>
                         </div>
                        </td>
                     </tr>
