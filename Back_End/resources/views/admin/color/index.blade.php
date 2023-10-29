@@ -6,7 +6,7 @@
         <th>ID</th>
         <th>Name</th>
         <th>
-            <a href="{{ route('admin.colors.create') }}" class="btn btn-primary">Thêm</a>
+            <a href="{{ route('admin.colors.create') }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i></a>
         </th>
         </thead>
         @isset($colors)
@@ -16,8 +16,8 @@
                         <td>{{ $color->id }}</td>
                         <td>{{ $color->name }}</td>
                         <td>
-                            <a href="{{ route('admin.colors.edit', ['id' => $color->id]) }}" class="btn btn-warning">Sửa</a>
-                            <a onclick="return confirm('Bạn có muốn xoá màu này không?')" href="{{ route('admin.colors.destroy', ['id' => $color->id]) }}" class="btn btn-danger">Xoá</a>
+                            <a href="{{ route('admin.colors.edit', ['id' => $color->id]) }}" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a onclick="return confirm('Bạn có muốn xoá màu này không?')" href="{{ route('admin.colors.destroy', ['id' => $color->id]) }}" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
                         </td>
                     </tr>
                 @endforeach

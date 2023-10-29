@@ -33,8 +33,11 @@ Route::prefix('admin')->group(function () {
 
     Route::prefix('products')->controller(ProductController::class)->group(function () {
         Route::get('/', 'index')->name('admin.products.index');
-        Route::get('create', 'create')->name('admin.products.create');
-        Route::post('store', 'store')->name('admin.products.store');
+
+        Route::get('/show/{id}', 'show')->name('admin.products.show');
+
+        Route::get('/create', 'create')->name('admin.products.create');
+        Route::post('/store', 'store')->name('admin.products.store');
         Route::get('/edit/{id}', 'edit')->name('admin.products.edit');
         Route::post('/update/{id}', 'update')->name('admin.products.update');
         Route::get('/destroy/{id}', 'destroy')->name('admin.products.destroy');
@@ -94,4 +97,3 @@ Route::prefix('admin')->group(function () {
         Route::get('/destroy/{id}', 'destroy')->name('admin.carts.destroy');
     });
 });
-

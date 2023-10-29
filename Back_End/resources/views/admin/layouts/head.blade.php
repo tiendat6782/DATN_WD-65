@@ -91,21 +91,33 @@
               </a>
             </li>
             <li class="menu-item">
+              <a href="{{ route('admin.categories.index') }}"  class="menu-link">
+                <i class="menu-icon fa-solid fa-list"></i>
+                  <div>Categories</div>
+              </a>
+            </li>
+            <li class="menu-item">
               <a href="{{ route('admin.products.index') }}"  class="menu-link">
                 <i class="menu-icon fa-brands fa-product-hunt"></i>
                 <div>Products</div>
               </a>
             </li>
-              <li class="menu-item">
-                  <a href="{{ route('admin.categories.index') }}"  class="menu-link">
-                      <i class="menu-icon fa-brands fa-product-hunt"></i>
-                      <div>Categories</div>
-                  </a>
-              </li>
             <li class="menu-item">
-              <a href="" class="menu-link">
+              <a href="{{ route('admin.users.index') }}" class="menu-link">
                 <i class="menu-icon fa-regular fa-user"></i>
                 <div>User</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="{{ route('admin.colors.index') }}" class="menu-link">
+                <i class="menu-icon fa-solid fa-palette"></i>
+                <div>Color</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="{{ route('admin.carts.index') }}" class="menu-link">
+                <i class="menu-icon fa-solid fa-cart-shopping"></i>
+                <div>Cart</div>
               </a>
             </li>
           </ul>
@@ -136,7 +148,7 @@
               id="navbar-collapse"
             >
               <!-- Search -->
-              <div class="navbar-nav align-items-center">Dashboard > Product  </div>
+              <div class="navbar-nav align-items-center">Dashboard >   </div>
               <!-- /Search -->
 
               <ul class="navbar-nav flex-row align-items-center ms-auto">
