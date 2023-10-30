@@ -36,9 +36,9 @@ class Product extends Model
     }
     public function getSize()
     {
-        $Size = Size::find($this->size_id);
-        if ($Size) {
-            return $Size->name;
+        $size = Size::find($this->size_id);
+        if ($size) {
+            return $size->name;
         } else {
             return "Empty";
         }

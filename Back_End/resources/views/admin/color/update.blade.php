@@ -2,7 +2,7 @@
 
 @section('contain')
     <div class="container mt-2 col-xl-8">
-        <form action="{{ route('admin.colors.store',['id' => $color->id]) }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('admin.colors.update',['id' => $color->id]) }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="mt-2">
                 <label for="">Name</label>

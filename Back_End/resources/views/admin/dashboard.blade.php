@@ -1,6 +1,6 @@
 @extends('admin.layouts.layout')
 
 @section('contain')
-    hello word
+    Chart
 @endsection
 
