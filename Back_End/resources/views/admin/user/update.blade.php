@@ -17,16 +17,22 @@
                 <input type="tel" name="phone_number" id="" class="form-control" value="{{$users->phone_number ?? old('phone_number') }}">
             </div>
             <div class="mt-2">
+                <label for="">Image</label>
+                @if ($users->image)
+                <input type="file" name="image" id="" class="form-control" value="{{ $users->image }}">
+                @endif
+            </div>
+            {{-- <div class="mt-2">
                 <label for="">Password</label>
                 <input type="password" name="password" id="" class="form-control" value="{{$users->password ?? old('password') }}">
-            </div>
+            </div> --}}
 
 
 
-            <div class="mt-2">
+            {{-- <div class="mt-2">
                 <label for="">Số lượng</label>
                 <input type="text" name="total_quantity" id="" class="form-control" value="{{ old('total_quantity') }}">
-            </div>
+            </div> --}}
             <div class="text-center mt-3">
                 <button class="btn btn-success" type="submit">Submit</button>
             </div>

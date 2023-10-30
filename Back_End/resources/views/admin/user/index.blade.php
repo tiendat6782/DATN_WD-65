@@ -7,10 +7,10 @@
         <th>Name</th>
         <th>Email</th>
         <th>Phone number</th>
-        <th>Email verified at</th>
-        <th>Password</th>
+        {{-- <th>Email verified at</th> --}}
+        <th>Image</th>
         <th>Role id</th>
-        <th>Remember token</th>
+        {{-- <th>Remember token</th> --}}
         <th>
             <a href="{{ route('admin.users.create') }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i></a>
         </th>
@@ -23,10 +23,13 @@
                         <td>{{$users->name}}</td>
                         <td>{{$users->email}}</td>
                         <td>{{$users->phone_number}}</td>
-                        <td>{{$users->create_at}}</td>
-                        <td>{{$users->password}}</td>
+                        {{-- <td>{{$users->create_at}}</td> --}}
+                        {{-- <td>{{$users->password}}</td> --}}
+                        <td>
+                            <img src="{{ asset('storage/'.$users->image) }}" width="200px" alt="">
+                            </td>
                         <td>{{$users->role_id}}</td>
-                        <td>{{$users->remember_token}}</td>
+                        {{-- <td>{{$users->remember_token}}</td> --}}
 
                         <td>
                             <a href="{{ route('admin.users.edit',['id'=>$users->id]) }}" class="btn btn-warning" ><i class="fa-solid fa-pen-to-square"></i></a>
