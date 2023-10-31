@@ -68,8 +68,8 @@ class SizeController extends Controller
      */
     public function edit($id)
     {
-        $sizes = DB::table('size')->where('id', $id)->first();
-        return view('admin.size.update', compact('sizes'));
+        $size = DB::table('size')->where('id', $id)->first();
+        return view('admin.size.update', compact('size'));
     }
 
     /**

@@ -15,9 +15,9 @@
                     <tr>
                         <td>{{ $size->id }}</td>
                         <td>{{ $size->name }}</td>
-                        <td>
-                            <a href="{{ route('admin.sizes.edit', ['id' => $size->id]) }}" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
-                            <a onclick="return confirm('Bạn có muốn xoá cỡ này không?')" href="{{ route('admin.sizes.destroy', ['id' => $size->id]) }}" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                        <td class="fs-3">
+                            <a href="{{ route('admin.sizes.edit', ['id' => $size->id]) }}" class="text-warning"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a onclick="return confirm('Bạn có muốn xoá cỡ này không?')" href="{{ route('admin.sizes.destroy', ['id' => $size->id]) }}" class="text-danger"><i class="fa-solid fa-trash"></i></a>
                         </td>
                     </tr>
                 @endforeach

@@ -15,9 +15,9 @@
                     <tr>
                         <td>{{ $categories->id }}</td>
                         <td>{{ $categories->name }}</td>
-                        <td>
-                            <a href="{{ route('admin.categories.edit', ['id' => $categories->id]) }}" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
-                            <a onclick="return confirm('Bạn có muốn loại này không?')" href="{{ route('admin.categories.destroy', ['id' => $categories->id]) }}" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                        <td class="fs-3">
+                            <a href="{{ route('admin.categories.edit', ['id' => $categories->id]) }}" class="text-warning"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a onclick="return confirm('Bạn có muốn loại này không?')" href="{{ route('admin.categories.destroy', ['id' => $categories->id]) }}" class="text-danger"><i class="fa-solid fa-trash"></i></a>
                         </td>
                     </tr>
                 @endforeach

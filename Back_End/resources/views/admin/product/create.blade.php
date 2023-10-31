@@ -52,11 +52,7 @@
                         @endforeach
                     </select>
                 </div>
-            </div>
-           
-            
-           
-            
+            </div>   
             <div class="mt-2">
                 <label for="">Số lượng</label>
                 <input type="text" name="total_quantity" id="" class="form-control" value="{{ old('total_quantity') }}">

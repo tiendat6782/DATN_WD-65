@@ -31,9 +31,9 @@
                         <td>{{$users->role_id}}</td>
                         {{-- <td>{{$users->remember_token}}</td> --}}
 
-                        <td>
-                            <a href="{{ route('admin.users.edit',['id'=>$users->id]) }}" class="btn btn-warning" ><i class="fa-solid fa-pen-to-square"></i></a>
-                            <a onclick="return confirm('Bạn có muốn xoá user này không?')" href="{{ route('admin.users.destroy',['id'=>$users->id]) }}" class="btn btn-danger" ><i class="fa-solid fa-trash"></i></a>
+                        <td class="fs-3">
+                            <a href="{{ route('admin.users.edit',['id'=>$users->id]) }}" class="text-warning" ><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a onclick="return confirm('Bạn có muốn xoá user này không?')" href="{{ route('admin.users.destroy',['id'=>$users->id]) }}" class="text-danger" ><i class="fa-solid fa-trash"></i></a>
 
                         </td>
                     </tr>
