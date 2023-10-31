@@ -13,4 +13,7 @@
             </div>
         </form>
     </div>
+    <div class="text-end fs-2">
+        <a href="{{ route('admin.sizes.index') }}"><i class="fa-solid fa-share me-3 text-warning"></a>
+    </div>
 @endsection

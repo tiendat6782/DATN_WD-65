@@ -15,9 +15,9 @@
                     <tr>
                         <td>{{ $color->id }}</td>
                         <td>{{ $color->name }}</td>
-                        <td>
-                            <a href="{{ route('admin.colors.edit', ['id' => $color->id]) }}" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
-                            <a onclick="return confirm('Bạn có muốn xoá màu này không?')" href="{{ route('admin.colors.destroy', ['id' => $color->id]) }}" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                        <td class="fs-3">
+                            <a href="{{ route('admin.colors.edit', ['id' => $color->id]) }}" class="text-warning"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a onclick="return confirm('Bạn có muốn xoá màu này không?')" href="{{ route('admin.colors.destroy', ['id' => $color->id]) }}" class="text-danger"><i class="fa-solid fa-trash"></i></a>
                         </td>
                     </tr>
                 @endforeach

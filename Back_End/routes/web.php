@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
@@ -33,9 +34,7 @@ Route::prefix('admin')->group(function () {
 
     Route::prefix('products')->controller(ProductController::class)->group(function () {
         Route::get('/', 'index')->name('admin.products.index');
-
         Route::get('/show/{id}', 'show')->name('admin.products.show');
-
         Route::get('/create', 'create')->name('admin.products.create');
         Route::post('/store', 'store')->name('admin.products.store');
         Route::get('/edit/{id}', 'edit')->name('admin.products.edit');
@@ -95,5 +94,13 @@ Route::prefix('admin')->group(function () {
         Route::get('/edit/{id}', 'edit')->name('admin.carts.edit');
         Route::post('/update/{id}', 'update')->name('admin.carts.update');
         Route::get('/destroy/{id}', 'destroy')->name('admin.carts.destroy');
+    });
+    Route::prefix('attribute')->controller(AttributeController::class)->group(function () {
+        Route::get('/', 'index')->name('admin.attribute.index');
+        Route::get('create', 'create')->name('admin.attribute.create');
+        Route::post('store', 'store')->name('admin.attribute.store');
+        Route::get('/edit/{id}', 'edit')->name('admin.attribute.edit');
+        Route::post('/update/{id}', 'update')->name('admin.attribute.update');
+        Route::get('/destroy/{id}', 'destroy')->name('admin.attribute.destroy');
     });
 });
