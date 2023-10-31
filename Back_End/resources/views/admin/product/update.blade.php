@@ -1,6 +1,7 @@
 @extends('admin.layouts.layout')
 
 @section('contain')
+
     <div class="container mt-2 ">
         <form action="{{ route('admin.products.update',['id' => $products->id]) }}" method="post" enctype="multipart/form-data">
             @csrf
@@ -67,8 +68,13 @@
                 <input type="text" name="total_quantity" id="" class="form-control" value="{{ $products->total_quantity ?? old('total_quantity') }}">
             </div>
             <div class="text-center mt-3">
+                
             <button class="btn btn-success" type="submit">Update</button>
             </div>
         </form>
+    </div>
+    <div class="fs-3 text-end">
+        <a href="{{ route('admin.products.index') }}"><i class="fa-solid fa-share me-3 text-warning"></i></a>
+        <a onclick="return confirm('Bạn có muốn xoá sản phẩm này không?')" href="{{ route('admin.products.destroy',['id'=>$products->id]) }}" class="text-danger" ><i class="fa-solid fa-trash"></i></a>
     </div>
 @endsection
