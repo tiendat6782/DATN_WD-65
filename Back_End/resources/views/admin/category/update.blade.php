@@ -6,6 +6,7 @@
             @csrf
             <div class="mt-2">
                 <label for="">Name</label>
+                @error('name') <span class="text-danger">{{ $message }}</span> @enderror
                 <input type="text" name="name" id="" class="form-control" value="{{$categories->name ?? old('name') }}">
             </div>
             <div class="text-center mt-3">

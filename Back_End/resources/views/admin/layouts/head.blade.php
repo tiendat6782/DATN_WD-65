@@ -85,8 +85,8 @@
 
           <ul class="menu-inner py-1">
             <li class="menu-item">
-              <a href="/admin" class="menu-link">
-                <i class="menu-icon tf-icons mdi mdi-home-outline"></i>
+              <a href="{{ route('admin.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons mdi mdi-home"></i>
                 <div>Dashboard</div>
               </a>
             </li>
@@ -104,13 +104,13 @@
             </li>
             <li class="menu-item">
               <a href="{{ route('admin.users.index') }}" class="menu-link">
-                <i class="menu-icon fa-regular fa-user"></i>
+                <i class="menu-icon fa-solid fa-user"></i>
                 <div>User</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="{{ route('admin.sizes.index') }}" class="menu-link">
-                <i class="menu-icon fa-solid fa-palette"></i>
+              <a href="{{ route('admin.sizes.index') }}" class="menu-link" >
+                <i class=" menu-icon fa-solid fa-baby"></i>
                 <div>Size</div>
               </a>
             </li>
@@ -160,7 +160,7 @@
               id="navbar-collapse"
             >
               <!-- Search -->
-              <div class="navbar-nav align-items-center">Dashboard >   </div>
+              <div class="navbar-nav align-items-center">Dashboard @if(isset($title)) > {{ $title }} @endif </div>
               <!-- /Search -->
 
               <ul class="navbar-nav flex-row align-items-center ms-auto">

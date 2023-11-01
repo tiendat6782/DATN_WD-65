@@ -16,8 +16,9 @@ class ColorController extends Controller
      */
     public function index()
     {
-        $colors = Color::all();
-        return  view('admin.color.index', compact('colors'));
+        $title = "Color";
+        $colors = Color::orderBy('id', 'desc')->paginate(10);
+        return  view('admin.color.index', compact('colors', 'title'));
     }
 
     /**
@@ -27,7 +28,8 @@ class ColorController extends Controller
      */
     public function create()
     {
-        return view('admin.color.create');
+        $title = "Create Color";
+        return view('admin.color.create', compact('title'));
     }
 
     /**
@@ -38,15 +40,28 @@ class ColorController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate();
+        $request->validate(
+            [
+                "name" => 'required',
+                "color_code" => 'required',
+                "description" => 'required',
+            ],
+            [
+                "name.required" => 'Not Empty. Please enter name color',
+                "color_code.required" => 'Not Empty. Please enter color code',
+                "description.required" => 'Not Empty. Please enter description',
+            ]
+        );
 
 
         DB::table('color')->insert(
             [
                 "name" => $request->name,
+                "color_code" => $request->color_code,
+                "description" => $request->description,
             ]
         );
-        return redirect()->route('admin.colors.index')->with(['msg' => 'theem thanh cong']);
+        return redirect()->route('admin.colors.index')->with(['msg' => 'Successfully']);
     }
 
     /**
@@ -68,8 +83,9 @@ class ColorController extends Controller
      */
     public function edit($id)
     {
-        $colors = DB::table('color')->where('id', $id)->first();
-        return view('admin.color.update', compact('colors'));
+        $title = "Update Color";
+        $color = DB::table('color')->where('id', $id)->first();
+        return view('admin.color.update', compact('color', 'title'));
     }
 
     /**
@@ -81,10 +97,24 @@ class ColorController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate(
+            [
+                "name" => 'required',
+                "color_code" => 'required',
+                "description" => 'required',
+            ],
+            [
+                "name.required" => 'Not Empty. Please enter name color',
+                "color_code.required" => 'Not Empty. Please enter color code',
+                "description.required" => 'Not Empty. Please enter description',
+            ]
+        );
         DB::table('color')->where('id', $id)->update([
             "name" => $request->name,
+            "color_code" => $request->color_code,
+            "description" => $request->description,
         ]);
-        return redirect()->route('admin.colors.index')->with(['msg' => 'Sửa thành công!']);
+        return redirect()->route('admin.colors.index')->with(['msg' => 'Update Successfully!']);
     }
 
     /**
@@ -97,7 +127,7 @@ class ColorController extends Controller
     {
         if ($id) {
             DB::table('color')->where('id', $id)->delete();
-            return redirect()->route('admin.colors.index')->with(['msg' => 'Xoa thanh cong ' . $id]);
+            return redirect()->route('admin.colors.index')->with(['msg' => 'Delete Successfully']);
         }
     }
 }

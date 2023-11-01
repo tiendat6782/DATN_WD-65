@@ -18,8 +18,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return  view('admin.user.index', compact('users'));
+        // Lấy ra các users có role_id = 1
+        $users = User::where('role_id', 2)->orderBy('id', 'desc')->paginate(10);
+        $title = "User";
+        return view('admin.user.index', compact('users', 'title'));
     }
 
     /**
@@ -43,9 +45,9 @@ class UserController extends Controller
     {
         // $request->validate();
 
-//        if ($request->hasFile('image')) {
-//            $image = uploadFile('hinh', $request->file('image'));
-//        }
+        //        if ($request->hasFile('image')) {
+        //            $image = uploadFile('hinh', $request->file('image'));
+        //        }
         if ($request->hasFile('image')) {
             $image = uploadFile('hinh', $request->file('image'));
         }
@@ -60,7 +62,7 @@ class UserController extends Controller
                 // "password" => $request->password,
             ]
         );
-        return redirect()->route('admin.users.index')->with(['msg' => 'theem thanh cong']);
+        return redirect()->route('admin.users.index')->with(['msg' => 'Sucessfully']);
     }
 
     /**
@@ -113,7 +115,7 @@ class UserController extends Controller
             "phone_number" => $request->phone_number,
             // "password" => $request->category_id,
         ]);
-        return redirect()->route('admin.users.index')->with(['msg' => 'Sửa thành công!']);
+        return redirect()->route('admin.users.index')->with(['msg' => 'Update Sucessfully!']);
     }
 
     /**
@@ -132,7 +134,7 @@ class UserController extends Controller
 
             Storage::delete('/public/' . $image);
             DB::table('users')->where('id', $id)->delete();
-            return redirect()->route('admin.users.index')->with(['msg' => 'Xoa thanh cong ' . $id]);
+            return redirect()->route('admin.users.index')->with(['msg' => 'Delete Sucessfully']);
         }
     }
 }

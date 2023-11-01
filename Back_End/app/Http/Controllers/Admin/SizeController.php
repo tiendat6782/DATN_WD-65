@@ -16,8 +16,9 @@ class SizeController extends Controller
      */
     public function index()
     {
-        $sizes = Size::all();
-        return  view('admin.size.index', compact('sizes'));
+        $title = "Size";
+        $sizes = Size::orderBy('id', 'desc')->paginate(10);
+        return  view('admin.size.index', compact('sizes', 'title'));
     }
 
     /**
@@ -27,7 +28,8 @@ class SizeController extends Controller
      */
     public function create()
     {
-        return view('admin.size.create');
+        $title = 'Create Size';
+        return view('admin.size.create', compact('title'));
     }
 
     /**
@@ -38,15 +40,25 @@ class SizeController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate();
+        $request->validate(
+            [
+                "name" => 'required',
+                "description" => 'required',
+            ],
+            [
+                "name.required" => 'Not empty. Please enter name',
+                "description.required" => 'Not empty. Please enter name',
+            ]
+        );
 
 
         DB::table('size')->insert(
             [
                 "name" => $request->name,
+                "description" => $request->description,
             ]
         );
-        return redirect()->route('admin.sizes.index')->with(['msg' => 'theem thanh cong']);
+        return redirect()->route('admin.sizes.index')->with(['msg' => 'Successfully']);
     }
 
     /**
@@ -68,8 +80,9 @@ class SizeController extends Controller
      */
     public function edit($id)
     {
+        $title = "Update Size";
         $size = DB::table('size')->where('id', $id)->first();
-        return view('admin.size.update', compact('size'));
+        return view('admin.size.update', compact('size','title'));
     }
 
     /**
@@ -81,10 +94,21 @@ class SizeController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate(
+            [
+                "name" => 'required',
+                "description" => 'required',
+            ],
+            [
+                "name.required" => 'Not empty. Please enter name',
+                "description.required" => 'Not empty. Please enter name',
+            ]
+        );
         DB::table('size')->where('id', $id)->update([
             "name" => $request->name,
+            "description" => $request->description,
         ]);
-        return redirect()->route('admin.sizes.index')->with(['msg' => 'Sửa thành công!']);
+        return redirect()->route('admin.sizes.index')->with(['msg' => 'Update Successfully!']);
     }
 
     /**
@@ -97,7 +121,7 @@ class SizeController extends Controller
     {
         if ($id) {
             DB::table('size')->where('id', $id)->delete();
-            return redirect()->route('admin.sizes.index')->with(['msg' => 'Xoa thanh cong ' . $id]);
+            return redirect()->route('admin.sizes.index')->with(['msg' => 'Delete Successfully']);
         }
     }
 }

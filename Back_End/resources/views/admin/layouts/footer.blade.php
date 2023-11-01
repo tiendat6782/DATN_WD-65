@@ -52,3 +52,17 @@
         alert('{{ session('msg') }}');
     </script>
 @endif
+<script>
+  // Lấy URL của trang hiện tại
+var currentUrl = window.location.href;
+
+// Lặp qua tất cả các thẻ <a> trong menu
+document.querySelectorAll('.menu-inner .menu-link').forEach(function(menuLink) {
+    // So sánh URL trong href với URL hiện tại
+    if (menuLink.getAttribute('href') === currentUrl) {
+        // Tìm thẻ cha <li> và thêm class active
+        menuLink.closest('.menu-item').classList.add('active');
+    }
+});
+
+</script>
