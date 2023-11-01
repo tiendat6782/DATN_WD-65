@@ -38,7 +38,16 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate();
+        $request->validate(
+            [
+                "name" => 'required',
+                "description" => 'required',
+            ],
+            [
+                "name.required" => 'Not empty. Please enter name',
+                "description.required" => 'Not empty. Please enter name',
+            ]
+        );
 
 
         DB::table('roles')->insert(
@@ -47,7 +56,7 @@ class RoleController extends Controller
                 "description" => $request->description,
             ]
         );
-        return redirect()->route('admin.roles.index')->with(['msg' => 'theem thanh cong']);
+        return redirect()->route('admin.roles.index')->with(['msg' => 'Sucessfully']);
     }
 
     /**
@@ -82,11 +91,21 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate(
+            [
+                "name" => 'required',
+                "description" => 'required',
+            ],
+            [
+                "name.required" => 'Not empty. Please enter name',
+                "description.required" => 'Not empty. Please enter name',
+            ]
+        );
         DB::table('roles')->where('id', $id)->update([
             "name" => $request->name,
             "description" => $request->description,
         ]);
-        return redirect()->route('admin.roles.index')->with(['msg' => 'Sửa thành công!']);
+        return redirect()->route('admin.roles.index')->with(['msg' => 'Update Sucessfully!']);
     }
 
     /**
@@ -99,7 +118,7 @@ class RoleController extends Controller
     {
         if ($id) {
             DB::table('roles')->where('id', $id)->delete();
-            return redirect()->route('admin.roles.index')->with(['msg' => 'Xoa thanh cong ' . $id]);
+            return redirect()->route('admin.roles.index')->with(['msg' => 'Delete Sucessfully']);
         }
     }
 }

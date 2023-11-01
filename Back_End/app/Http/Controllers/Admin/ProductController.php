@@ -16,20 +16,42 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::orderBy('id', 'desc')->paginate(10);
-        $tille = "Product";
-        return  view('admin.product.index', compact('products', 'tille'));
+        $title = "Product";
+        return  view('admin.product.index', compact('products', 'title'));
     }
+    // ProductController.php
+
+
+
     public function create()
     {
         $categories = Category::all();
-        $tille = "New Product";
+        $title = "New Product";
         $sizes = Size::all();
         $colors = Color::all();
-        return view('admin.product.create', compact(['categories', 'sizes', 'colors', 'tille']));
+        return view('admin.product.create', compact(['categories', 'sizes', 'colors', 'title']));
     }
     public function store(Request $request)
     {
-        // $request->validate();
+        $request->validate(
+            [
+                'name' => 'required|string',
+                'price' => 'required|numeric',
+                'description' => 'required|string',
+                'category_id' => 'required|exists:categories,id', // Kiểm tra xem category_id có tồn tại trong bảng categories hay không
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Kiểm tra và xác thực tệp hình ảnh (ví dụ: JPEG, PNG) và giới hạn kích thước tệp là 2MB (2048 KB)
+            ],
+            [
+                'name.required' => 'Not empty. Please enter name',
+                'price.required' => 'Not empty. Please enter price',
+                'price.numeric' => 'Please enter price is number',
+                'description.required' => 'Not empty. Please enter description',
+                'image.required' => 'Not empty. Please enter image',
+                'image.image' => 'Only enter file image',
+                'image.mimes' => 'Only enter jpeg, png, jpg, gif',
+                'image.max' => 'Image < 2Mb',
+            ]
+        );
 
         if ($request->hasFile('image')) {
             $image = uploadFile('hinh', $request->file('image'));
@@ -42,20 +64,18 @@ class ProductController extends Controller
                 "description" => $request->description,
                 "image" => $image,
                 "category_id" => $request->category_id,
-                "size_id" => $request->size_id,
-                "color_id" => $request->size_id,
-                "total_quantity" => $request->total_quantity,
             ]
         );
-        return redirect()->route('admin.products.index')->with(['msg' => 'More Success']);
+        return redirect()->route('admin.products.index')->with(['msg' => 'Sucessfully']);
     }
     public function edit($id)
     {
+        $title = "Update Product";
         $categories = Category::all();
         $sizes = Size::all();
         $colors = Color::all();
         $products = Product::find($id);
-        return view('admin.product.update', compact('products', 'sizes', 'colors', 'categories'));
+        return view('admin.product.update', compact('products', 'sizes', 'colors', 'categories', 'title'));
     }
     public function show($id)
     {
@@ -67,6 +87,25 @@ class ProductController extends Controller
     }
     public function update(Request $request, $id)
     {
+        $request->validate(
+            [
+                'name' => 'required',
+                'price' => 'required|numeric',
+                'description' => 'required',
+                'category_id' => 'required|exists:categories,id', // Kiểm tra xem category_id có tồn tại trong bảng categories hay không
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Kiểm tra và xác thực tệp hình ảnh (ví dụ: JPEG, PNG) và giới hạn kích thước tệp là 2MB (2048 KB)
+            ],
+            [
+                'name.required' => 'Not empty. Please enter name',
+                'price.required' => 'Not empty. Please enter price',
+                'price.numeric' => 'Please enter price is number',
+                'description.required' => 'Not empty. Please enter description',
+                'image.required' => 'Not empty. Please enter image',
+                'image.image' => 'Only enter file image',
+                'image.mimes' => 'Only enter jpeg, png, jpg, gif',
+                'image.max' => 'Image < 2Mb',
+            ]
+        );
         if ($id) {
             $image = DB::table('products')->where('id', $id)->select('image')->first()->image;
             if ($request->hasFile('image')) {
@@ -82,9 +121,6 @@ class ProductController extends Controller
             "description" => $request->description,
             "image" => $image,
             "category_id" => $request->category_id,
-            "size_id" => $request->size_id,
-            "color_id" => $request->size_id,
-            "total_quantity" => $request->total_quantity,
         ]);
         return redirect()->route('admin.products.index')->with(['msg' => 'Update Successfully!']);
     }
@@ -98,7 +134,7 @@ class ProductController extends Controller
 
             Storage::delete('/public/' . $image);
             DB::table('products')->where('id', $id)->delete();
-            return redirect()->route('admin.products.index')->with(['msg' => 'Deleted Successfully' . $id]);
+            return redirect()->route('admin.products.index')->with(['msg' => 'Deleted Successfully']);
         }
     }
 }

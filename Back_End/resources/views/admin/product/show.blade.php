@@ -24,14 +24,7 @@
         <th>Category:</th>
         <td>{{ $categories->find($products->category_id)->name ?? "Empty" }}</td>
     </tr>
-    {{-- <tr>
-        <th>Color:</th>
-        <td>{{ $colors->find($products->color_id)->name ?? "Empty" }}</td>
-    </tr>
-    <tr>
-        <th>Size:</th>
-        <td>{{ $sizes->find($products->size_id)->name ?? "Empty" }}</td>
-    </tr> --}}
+   
     <tr>
         <th>Total quantity</th>
         <td>{{ $products->total_quantity }}</td>

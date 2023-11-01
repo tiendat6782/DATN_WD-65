@@ -17,9 +17,11 @@
         </thead>
         @isset($items)
             @if ($items->count()>0)
+            @php $i = 1 @endphp
+
                 @foreach ($items as $item)
                     <tr>
-                       <td>{{$item->id}}</td>
+                       <td>{{$i}}</td>
                        <td>{{$item->getName()}}</td>
                        <td>{{$item->getSize()}} $</td>
                        <td>{{$item->getColor()}}</td>                    
@@ -31,10 +33,15 @@
                         </div>
                        </td>
                     </tr>
+                @php $i++ @endphp
+
                 @endforeach
             @else
 
             @endif
         @endisset
     </table>
+    <div class="text-center d-flex justify-content-center">
+        {{ $items->links() }}
+    </div>
 @endsection

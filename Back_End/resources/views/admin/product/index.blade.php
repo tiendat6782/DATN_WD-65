@@ -32,10 +32,8 @@
                         </td>
                        <td>
                         <a href="{{ route('admin.products.show',['id'=>$product->id]) }}">Chi tiết</a>
-                       </td>
-                       
-                       <td>                      
-                        <td class="fs-3 text-center">
+                                           
+                        <td class="fs-3 ">
                             <a href="{{ route('admin.products.edit',['id'=>$product->id]) }}" class="text-warning" ><i class="fa-solid fa-pen-to-square"></i></a>
                             <a onclick="return confirm('Bạn có muốn xoá sản phẩm này không?')" href="{{ route('admin.products.destroy',['id'=>$product->id]) }}" class="text-danger" ><i class="fa-solid fa-trash"></i></a>
                         </div>
