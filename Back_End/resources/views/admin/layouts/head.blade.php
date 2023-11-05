@@ -132,6 +132,18 @@
                 <div>Attribute</div>
               </a>
             </li>
+              <li class="menu-item">
+                  <a href="{{ route('admin.review.index') }}" class="menu-link">
+                      <i class="menu-icon fa-solid fa-star"></i>
+                      <div>Review</div>
+                  </a>
+              </li>
+              <li class="menu-item">
+                  <a href="{{ route('admin.galery.index') }}" class="menu-link">
+                      <i class="menu-icon fa-solid fa-star"></i>
+                      <div>Galery</div>
+                  </a>
+              </li>
           </ul>
         </aside>
         <!-- / Menu -->

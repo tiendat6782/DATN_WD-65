@@ -43,16 +43,17 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
-        DB::table('review')->insert(
-            [
-                "product_id" => $request->product_id,
-                "user_id" => $request->user_id,
-                "rating" => $request->rating,
-                "comment" => $request->comment,
-                "date" => $request->date,
-            ]
-        );
-        return redirect()->route('admin.reviews.index')->with(['msg' => 'theem thanh cong']);
+        $date = $request->input('date');
+
+        DB::table('review')->insert([
+            "product_id" => $request->product_id,
+            "user_id" => $request->user_id,
+            "rating" => $request->rating,
+            "comment" => $request->comment,
+            "date" => $date
+        ]);
+
+        return redirect()->route('admin.review.index')->with(['msg' => 'Thêm thành công']);
     }
 
     /**
@@ -89,16 +90,18 @@ class ReviewController extends Controller
      */
     public function update(Request $request, $id)
     {
-        DB::table('review')->insert(
-            [
+        $date = $request->input('date');
+        DB::table('review')
+            ->where('id', $id)
+            ->update([
                 "product_id" => $request->product_id,
                 "user_id" => $request->user_id,
                 "rating" => $request->rating,
-                "comment" => $request->category_id,
-                "date" => $request->date(),
-            ]
-        );
-        return redirect()->route('admin.reviews.index')->with(['msg' => 'Sửa thành công!']);
+                "comment" => $request->comment,
+                "date" => $date
+            ]);
+
+        return redirect()->route('admin.review.index')->with(['msg' => 'Sửa thành công!']);
     }
 
     /**
@@ -113,7 +116,7 @@ class ReviewController extends Controller
             $image = DB::table('review')
                 ->where('id', $id);
             DB::table('review')->where('id', $id)->delete();
-            return redirect()->route('admin.reviews.index')->with(['msg' => 'Xoa thanh cong ' . $id]);
+            return redirect()->route('admin.review.index')->with(['msg' => 'Xoa thanh cong ' . $id]);
         }
     }
 }
