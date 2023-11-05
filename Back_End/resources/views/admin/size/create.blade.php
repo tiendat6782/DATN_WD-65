@@ -1,16 +1,26 @@
 @extends('admin.layouts.layout')
 
 @section('contain')
-    <div class="container mt-2 col-xl-8">
+    <div class="container mt-2 ">
         <form action="{{ route('admin.sizes.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="mt-2">
                 <label for="">Name</label>
+                @error('name') <span class="text-danger">{{ $message }}</span> @enderror
                 <input type="text" name="name" id="" class="form-control" value="{{ old('name') }}">
+            </div>
+            <div class="mt-2">
+                <label for="">Description</label>
+                @error('description') <span class="text-danger">{{ $message }}</span> @enderror
+                <input type="text" name="description" id="" class="form-control" value="{{ old('description') }}">
             </div>
             <div class="text-center mt-3">
                 <button class="btn btn-success" type="submit">Submit</button>
             </div>
         </form>
+        <div class="text-end fs-2">
+            <a href="{{ route('admin.sizes.index') }}">hello</a>
+        </div>
     </div>
+    
 @endsection

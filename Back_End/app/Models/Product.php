@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
+use App\Models\Attribute;
 use Illuminate\Support\Str;
 
 class Product extends Model
@@ -14,6 +15,10 @@ class Product extends Model
     public function limitDescription()
     {
         return Str::limit($this->description, 30, '...');
+    }
+    public function images()
+    {
+        return $this->hasMany(Image::class);
     }
     public function getCate()
     {
@@ -35,9 +40,9 @@ class Product extends Model
     }
     public function getSize()
     {
-        $Size = Size::find($this->size_id);
-        if ($Size) {
-            return $Size->name;
+        $size = Size::find($this->size_id);
+        if ($size) {
+            return $size->name;
         } else {
             return "Empty";
         }

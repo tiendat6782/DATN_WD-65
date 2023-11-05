@@ -16,8 +16,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        return  view('admin.category.index', compact('categories'));
+        $categories = Category::orderBy('id', 'desc')->paginate(10);
+        $title = "Category";
+        return  view('admin.category.index', compact('categories', 'title'));
     }
 
     /**
@@ -27,7 +28,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.category.create');
+        $title = "Create Category";
+        return view('admin.category.create', compact('title'));
     }
 
     /**
@@ -38,7 +40,14 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate();
+        $request->validate(
+            [
+                "name" => 'required',
+            ],
+            [
+                "name.required" => "Not empty. Please enter name"
+            ]
+        );
 
 
         DB::table('categories')->insert(
@@ -46,7 +55,7 @@ class CategoryController extends Controller
                 "name" => $request->name,
             ]
         );
-        return redirect()->route('admin.categories.index')->with(['msg' => 'theem thanh cong']);
+        return redirect()->route('admin.categories.index')->with(['msg' => 'Sucessfully']);
     }
 
     /**
@@ -68,8 +77,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
+        $title = "Update title";
         $categories = DB::table('categories')->where('id', $id)->first();
-        return view('admin.category.update', compact('categories'));
+        return view('admin.category.update', compact('categories', 'title'));
     }
 
     /**
@@ -81,10 +91,18 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate(
+            [
+                "name" => 'required',
+            ],
+            [
+                "name.required" => "Not empty. Please enter name"
+            ]
+        );
         DB::table('categories')->where('id', $id)->update([
             "name" => $request->name,
         ]);
-        return redirect()->route('admin.categories.index')->with(['msg' => 'Sửa thành công!']);
+        return redirect()->route('admin.categories.index')->with(['msg' => 'Update Sucessfully!']);
     }
 
     /**
@@ -97,7 +115,7 @@ class CategoryController extends Controller
     {
         if ($id) {
             DB::table('categories')->where('id', $id)->delete();
-            return redirect()->route('admin.categories.index')->with(['msg' => 'Xoa thanh cong ' . $id]);
+            return redirect()->route('admin.categories.index')->with(['msg' => 'Delete Sucessfully']);
         }
     }
 }

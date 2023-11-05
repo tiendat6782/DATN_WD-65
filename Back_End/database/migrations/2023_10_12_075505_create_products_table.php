@@ -18,11 +18,9 @@ return new class extends Migration
             $table->string('name');
             $table->decimal('price', 10, 2);
             $table->text('description');
-            $table->text('image');
+            $table->text('image')->nullable();
             $table->integer('category_id');
-            $table->integer('size_id');
-            $table->integer('color_id');
-            $table->integer('total_quantity');
+            $table->integer('total_quantity')->default(0);
             $table->timestamps();
         });
     }

@@ -65,7 +65,7 @@
           class="layout-menu menu-vertical menu bg-menu-theme"
         >
           <div class="app-brand demo">
-            <a href="index.html" class="app-brand-link">
+            <a href="{{ route('admin.index') }}" class="app-brand-link">
               <span class="app-brand-text demo menu-text fw-semibold ms-2"
                 >ShopShose</span
               >
@@ -85,9 +85,15 @@
 
           <ul class="menu-inner py-1">
             <li class="menu-item">
-              <a href="/admin" class="menu-link">
-                <i class="menu-icon tf-icons mdi mdi-home-outline"></i>
+              <a href="{{ route('admin.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons mdi mdi-home"></i>
                 <div>Dashboard</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="{{ route('admin.categories.index') }}"  class="menu-link">
+                <i class="menu-icon fa-solid fa-list"></i>
+                  <div>Categories</div>
               </a>
             </li>
             <li class="menu-item">
@@ -96,52 +102,34 @@
                 <div>Products</div>
               </a>
             </li>
-              <li class="menu-item">
-                  <a href="{{ route('admin.categories.index') }}"  class="menu-link">
-                      <i class="menu-icon fa-brands fa-product-hunt"></i>
-                      <div>Categories</div>
-                  </a>
-              </li>
-              <li class="menu-item">
-                  <a href="{{ route('admin.colors.index') }}"  class="menu-link">
-                      <i class="menu-icon fa-brands fa-product-hunt"></i>
-                      <div>Color</div>
-                  </a>
-              </li>
-              <li class="menu-item">
-                  <a href="{{ route('admin.carts.index') }}"  class="menu-link">
-                      <i class="menu-icon fa-brands fa-product-hunt"></i>
-                      <div>Cart</div>
-                  </a>
-              </li>
-              <li class="menu-item">
-                  <a href="{{ route('admin.sizes.index') }}"  class="menu-link">
-                      <i class="menu-icon fa-brands fa-product-hunt"></i>
-                      <div>Size</div>
-                  </a>
-              </li>
-              <li class="menu-item">
-                  <a href="{{ route('admin.roles.index') }}"  class="menu-link">
-                      <i class="menu-icon fa-brands fa-product-hunt"></i>
-                      <div>Role</div>
-                  </a>
-              </li>
-              <li class="menu-item">
-                  <a href="{{ route('admin.reviews.index') }}"  class="menu-link">
-                      <i class="menu-icon fa-brands fa-product-hunt"></i>
-                      <div>Review</div>
-                  </a>
-              </li>
-              <li class="menu-item">
-                  <a href="{{ route('admin.attributes.index') }}"  class="menu-link">
-                      <i class="menu-icon fa-brands fa-product-hunt"></i>
-                      <div>Attributes</div>
-                  </a>
-              </li>
             <li class="menu-item">
               <a href="{{ route('admin.users.index') }}" class="menu-link">
-                <i class="menu-icon fa-regular fa-user"></i>
+                <i class="menu-icon fa-solid fa-user"></i>
                 <div>User</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="{{ route('admin.sizes.index') }}" class="menu-link" >
+                <i class=" menu-icon fa-solid fa-baby"></i>
+                <div>Size</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="{{ route('admin.colors.index') }}" class="menu-link">
+                <i class="menu-icon fa-solid fa-palette"></i>
+                <div>Color</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="{{ route('admin.carts.index') }}" class="menu-link">
+                <i class="menu-icon fa-solid fa-cart-shopping"></i>
+                <div>Cart</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="{{ route('admin.attribute.index') }}" class="menu-link">
+                <i class="menu-icon fa-solid fa-star"></i>
+                <div>Attribute</div>
               </a>
             </li>
           </ul>
@@ -172,7 +160,7 @@
               id="navbar-collapse"
             >
               <!-- Search -->
-              <div class="navbar-nav align-items-center">Dashboard > Product  </div>
+              <div class="navbar-nav align-items-center">Dashboard @if(isset($title)) > {{ $title }} @endif </div>
               <!-- /Search -->
 
               <ul class="navbar-nav flex-row align-items-center ms-auto">

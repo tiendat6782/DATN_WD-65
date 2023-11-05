@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Role;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -17,8 +18,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return  view('admin.user.index', compact('users'));
+        // Lấy ra các users có role_id = 1
+        $users = User::where('role_id', 2)->orderBy('id', 'desc')->paginate(10);
+        $title = "User";
+        return view('admin.user.index', compact('users', 'title'));
     }
 
     /**
@@ -42,20 +45,24 @@ class UserController extends Controller
     {
         // $request->validate();
 
-//        if ($request->hasFile('image')) {
-//            $image = uploadFile('hinh', $request->file('image'));
-//        }
+        //        if ($request->hasFile('image')) {
+        //            $image = uploadFile('hinh', $request->file('image'));
+        //        }
+        if ($request->hasFile('image')) {
+            $image = uploadFile('hinh', $request->file('image'));
+        }
 
         DB::table('users')->insert(
             [
                 "name" => $request->name,
                 "email" => $request->email,
                 "phone_number" => $request->phone_number,
+                "image" => $image,
                 "email_verified_at" => $request->email_verified_at,
-                "password" => $request->password,
+                // "password" => $request->password,
             ]
         );
-        return redirect()->route('admin.users.index')->with(['msg' => 'theem thanh cong']);
+        return redirect()->route('admin.users.index')->with(['msg' => 'Sucessfully']);
     }
 
     /**
@@ -91,13 +98,24 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if ($id) {
+            $image = DB::table('users')->where('id', $id)->select('image')->first()->image;
+            if ($request->hasFile('image')) {
+                $resultImg = Storage::delete('/public/' . $image);
+                if ($resultImg) {
+                    $image = uploadFile('hinh', $request->file('image'));
+                }
+            }
+        }
+
         DB::table('users')->where('id', $id)->update([
             "name" => $request->name,
             "email" => $request->email,
-            "phone_number" => $request->description,
-            "password" => $request->category_id,
+            "image" => $image,
+            "phone_number" => $request->phone_number,
+            // "password" => $request->category_id,
         ]);
-        return redirect()->route('admin.users.index')->with(['msg' => 'Sửa thành công!']);
+        return redirect()->route('admin.users.index')->with(['msg' => 'Update Sucessfully!']);
     }
 
     /**
@@ -109,8 +127,14 @@ class UserController extends Controller
     public function destroy($id)
     {
         if ($id) {
+            $image = DB::table('users')
+                ->where('id', $id)
+                ->select('image')
+                ->first()->image;
+
+            Storage::delete('/public/' . $image);
             DB::table('users')->where('id', $id)->delete();
-            return redirect()->route('admin.users.index')->with(['msg' => 'Xoa thanh cong ' . $id]);
+            return redirect()->route('admin.users.index')->with(['msg' => 'Delete Sucessfully']);
         }
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
@@ -7,8 +8,6 @@ use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\CartController;
-use App\Http\Controllers\Admin\AttributesController;
-use App\Http\Controllers\Admin\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,14 +28,15 @@ Route::get('/', function () {
 
 
 Route::prefix('admin')->group(function () {
-    Route::get('/', function () {
+    Route::get('/dashboard', function () {
         return view('admin.dashboard');
     })->name('admin.index');
 
     Route::prefix('products')->controller(ProductController::class)->group(function () {
         Route::get('/', 'index')->name('admin.products.index');
-        Route::get('create', 'create')->name('admin.products.create');
-        Route::post('store', 'store')->name('admin.products.store');
+        Route::get('/show/{id}', 'show')->name('admin.products.show');
+        Route::get('/create', 'create')->name('admin.products.create');
+        Route::post('/store', 'store')->name('admin.products.store');
         Route::get('/edit/{id}', 'edit')->name('admin.products.edit');
         Route::post('/update/{id}', 'update')->name('admin.products.update');
         Route::get('/destroy/{id}', 'destroy')->name('admin.products.destroy');
@@ -95,23 +95,13 @@ Route::prefix('admin')->group(function () {
         Route::post('/update/{id}', 'update')->name('admin.carts.update');
         Route::get('/destroy/{id}', 'destroy')->name('admin.carts.destroy');
     });
-    //REVIEW
-    Route::prefix('reviews')->controller(ReviewController::class)->group(function () {
-        Route::get('/', 'index')->name('admin.reviews.index');
-        Route::get('create', 'create')->name('admin.reviews.create');
-        Route::post('store', 'store')->name('admin.reviews.store');
-        Route::get('/edit/{id}', 'edit')->name('admin.reviews.edit');
-        Route::post('/update/{id}', 'update')->name('admin.reviews.update');
-        Route::get('/destroy/{id}', 'destroy')->name('admin.reviews.destroy');
-    });
-    //ATTRIBUTES
-    Route::prefix('attributes')->controller(AttributesController::class)->group(function () {
-        Route::get('/', 'index')->name('admin.attributes.index');
-        Route::get('create', 'create')->name('admin.attributes.create');
-        Route::post('store', 'store')->name('admin.attributes.store');
-        Route::get('/edit/{id}', 'edit')->name('admin.attributes.edit');
-        Route::post('/update/{id}', 'update')->name('admin.attributes.update');
-        Route::get('/destroy/{id}', 'destroy')->name('admin.attributes.destroy');
+    Route::prefix('attribute')->controller(AttributeController::class)->group(function () {
+        Route::get('/', 'index')->name('admin.attribute.index');
+        Route::get('create', 'create')->name('admin.attribute.create');
+        Route::post('store', 'store')->name('admin.attribute.store');
+        Route::get('/edit/{id}', 'edit')->name('admin.attribute.edit');
+        Route::post('/update/{id}', 'update')->name('admin.attribute.update');
+        Route::get('/destroy/{id}', 'destroy')->name('admin.attribute.destroy');
     });
 });
 

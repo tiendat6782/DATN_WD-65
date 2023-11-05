@@ -19,8 +19,9 @@ class CartController extends Controller
      */
     public function index()
     {
-        $carts = Cart::all();
-        return  view('admin.cart.index', compact('carts'));
+        $title = "Cart";
+        $carts = Cart::orderBy('id', 'desc')->paginate(10);
+        return  view('admin.cart.index', compact('carts', 'title'));
     }
 
     /**
@@ -28,12 +29,7 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        $users = User::all();
-        $products = Product::all();
-        return view('admin.cart.create', compact(['users', 'products']));
-    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -43,7 +39,13 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate();
+        $request->validate(
+            [
+                "user_id" => 'required',
+                "product_id" => 'required',
+                "quantity" => 'required|numeric',
+            ]
+        );
 
 
         DB::table('cart')->insert(
@@ -53,7 +55,7 @@ class CartController extends Controller
                 "quantity" => $request->quantity,
             ]
         );
-        return redirect()->route('admin.carts.index')->with(['msg' => 'theem thanh cong']);
+        return redirect()->route('admin.carts.index')->with(['msg' => 'Sucessfully']);
     }
 
     /**
@@ -95,7 +97,7 @@ class CartController extends Controller
             "product_id" => $request->product_id,
             "quantity" => $request->quantity,
         ]);
-        return redirect()->route('admin.carts.index')->with(['msg' => 'Sửa thành công!']);
+        return redirect()->route('admin.carts.index')->with(['msg' => 'Update Sucessfully']);
     }
 
     /**
@@ -108,7 +110,7 @@ class CartController extends Controller
     {
         if ($id) {
             DB::table('cart')->where('id', $id)->delete();
-            return redirect()->route('admin.carts.index')->with(['msg' => 'Xoa thanh cong ' . $id]);
+            return redirect()->route('admin.carts.index')->with(['msg' => 'Delete Sucessfully']);
         }
     }
 }

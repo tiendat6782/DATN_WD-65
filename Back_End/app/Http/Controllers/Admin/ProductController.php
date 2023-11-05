@@ -3,50 +3,55 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Models\Product;
 use App\Models\Category;
 use App\Models\Color;
+use App\Models\Product;
 use App\Models\Size;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $products = Product::all();
-        $tille = "Product";
-        return  view('admin.product.index', compact('products'));
+        $products = Product::orderBy('id', 'desc')->paginate(10);
+        $title = "Product";
+        return  view('admin.product.index', compact('products', 'title'));
     }
+    // ProductController.php
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function create()
     {
         $categories = Category::all();
+        $title = "New Product";
         $sizes = Size::all();
         $colors = Color::all();
-        return view('admin.product.create', compact(['categories', 'sizes', 'colors']));
+        return view('admin.product.create', compact(['categories', 'sizes', 'colors', 'title']));
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        // $request->validate();
+        $request->validate(
+            [
+                'name' => 'required|string',
+                'price' => 'required|numeric',
+                'description' => 'required|string',
+                'category_id' => 'required|exists:categories,id', // Kiểm tra xem category_id có tồn tại trong bảng categories hay không
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Kiểm tra và xác thực tệp hình ảnh (ví dụ: JPEG, PNG) và giới hạn kích thước tệp là 2MB (2048 KB)
+            ],
+            [
+                'name.required' => 'Not empty. Please enter name',
+                'price.required' => 'Not empty. Please enter price',
+                'price.numeric' => 'Please enter price is number',
+                'description.required' => 'Not empty. Please enter description',
+                'image.required' => 'Not empty. Please enter image',
+                'image.image' => 'Only enter file image',
+                'image.mimes' => 'Only enter jpeg, png, jpg, gif',
+                'image.max' => 'Image < 2Mb',
+            ]
+        );
 
         if ($request->hasFile('image')) {
             $image = uploadFile('hinh', $request->file('image'));
@@ -59,49 +64,48 @@ class ProductController extends Controller
                 "description" => $request->description,
                 "image" => $image,
                 "category_id" => $request->category_id,
-                "size_id" => $request->size_id,
-                "color_id" => $request->size_id,
-                "total_quantity" => $request->total_quantity,
             ]
         );
-        return redirect()->route('admin.products.index')->with(['msg' => 'theem thanh cong']);
+        return redirect()->route('admin.products.index')->with(['msg' => 'Sucessfully']);
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
+    {
+        $title = "Update Product";
+        $categories = Category::all();
+        $sizes = Size::all();
+        $colors = Color::all();
+        $products = Product::find($id);
+        return view('admin.product.update', compact('products', 'sizes', 'colors', 'categories', 'title'));
+    }
+    public function show($id)
     {
         $categories = Category::all();
         $sizes = Size::all();
         $colors = Color::all();
         $products = DB::table('products')->where('id', $id)->first();
-        return view('admin.product.update', compact('products', 'sizes', 'colors', 'categories'));
+        return view('admin.product.show', compact('products', 'sizes', 'colors', 'categories'));
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
+        $request->validate(
+            [
+                'name' => 'required',
+                'price' => 'required|numeric',
+                'description' => 'required',
+                'category_id' => 'required|exists:categories,id', // Kiểm tra xem category_id có tồn tại trong bảng categories hay không
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Kiểm tra và xác thực tệp hình ảnh (ví dụ: JPEG, PNG) và giới hạn kích thước tệp là 2MB (2048 KB)
+            ],
+            [
+                'name.required' => 'Not empty. Please enter name',
+                'price.required' => 'Not empty. Please enter price',
+                'price.numeric' => 'Please enter price is number',
+                'description.required' => 'Not empty. Please enter description',
+                'image.required' => 'Not empty. Please enter image',
+                'image.image' => 'Only enter file image',
+                'image.mimes' => 'Only enter jpeg, png, jpg, gif',
+                'image.max' => 'Image < 2Mb',
+            ]
+        );
         if ($id) {
             $image = DB::table('products')->where('id', $id)->select('image')->first()->image;
             if ($request->hasFile('image')) {
@@ -117,19 +121,9 @@ class ProductController extends Controller
             "description" => $request->description,
             "image" => $image,
             "category_id" => $request->category_id,
-            "size_id" => $request->size_id,
-            "color_id" => $request->size_id,
-            "total_quantity" => $request->total_quantity,
         ]);
-        return redirect()->route('admin.products.index')->with(['msg' => 'Sửa thành công!']);
+        return redirect()->route('admin.products.index')->with(['msg' => 'Update Successfully!']);
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         if ($id) {
@@ -140,7 +134,7 @@ class ProductController extends Controller
 
             Storage::delete('/public/' . $image);
             DB::table('products')->where('id', $id)->delete();
-            return redirect()->route('admin.products.index')->with(['msg' => 'Xoa thanh cong ' . $id]);
+            return redirect()->route('admin.products.index')->with(['msg' => 'Deleted Successfully']);
         }
     }
 }
