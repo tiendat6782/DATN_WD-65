@@ -4,6 +4,9 @@
     <div class="container mt-2 ">
         <form action="{{ route('admin.sizes.store') }}" method="post" enctype="multipart/form-data">
             @csrf
+            <div class="fs-3">
+                <a href="{{ route('admin.sizes.index') }}"><i class="fa-solid fa-share me-3 text-warning"></i></a>
+            </div>
             <div class="mt-2">
                 <label for="">Name</label>
                 @error('name') <span class="text-danger">{{ $message }}</span> @enderror
@@ -18,9 +21,7 @@
                 <button class="btn btn-success" type="submit">Submit</button>
             </div>
         </form>
-        <div class="text-end fs-2">
-            <a href="{{ route('admin.sizes.index') }}">hello</a>
-        </div>
+       
     </div>
     
 @endsection

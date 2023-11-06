@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Color;
+use App\Models\Product;
+use App\Models\Attribute;
 
 class ColorController extends Controller
 {
@@ -42,7 +44,7 @@ class ColorController extends Controller
     {
         $request->validate(
             [
-                "name" => 'required',
+                "name" => 'required|unique:color',
                 "color_code" => 'required',
                 "description" => 'required',
             ],
@@ -99,7 +101,7 @@ class ColorController extends Controller
     {
         $request->validate(
             [
-                "name" => 'required',
+                "name" => 'required|unique:color',
                 "color_code" => 'required',
                 "description" => 'required',
             ],
@@ -123,10 +125,24 @@ class ColorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function destroy($id)
     {
         if ($id) {
+            $product = Product::whereHas('attributes', function ($query) use ($id) {
+                $query->where('color_id', $id);
+            })->first();
+
+            Attribute::where('color_id', $id)->delete();
+
+            if ($product) {
+                $product->total_quantity = $product->attributes()->sum('quantity');
+                $product->save();
+            }
+
+            // Xóa bản ghi trong bảng 'size'
             DB::table('color')->where('id', $id)->delete();
+
             return redirect()->route('admin.colors.index')->with(['msg' => 'Delete Successfully']);
         }
     }
