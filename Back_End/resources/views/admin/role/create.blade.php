@@ -17,4 +17,7 @@
             </div>
         </form>
     </div>
+    <div class="text-end f">
+        <a href="{{ route('admin.roles.index') }}"><i class="fa-solid fa-share me-3 text-warning"></a>
+    </div>
 @endsection

@@ -65,7 +65,7 @@
           class="layout-menu menu-vertical menu bg-menu-theme"
         >
           <div class="app-brand demo">
-            <a href="index.html" class="app-brand-link">
+            <a href="{{ route('admin.index') }}" class="app-brand-link">
               <span class="app-brand-text demo menu-text fw-semibold ms-2"
                 >ShopShose</span
               >
@@ -109,6 +109,12 @@
               </a>
             </li>
             <li class="menu-item">
+              <a href="{{ route('admin.sizes.index') }}" class="menu-link">
+                <i class="menu-icon fa-solid fa-palette"></i>
+                <div>Size</div>
+              </a>
+            </li>
+            <li class="menu-item">
               <a href="{{ route('admin.colors.index') }}" class="menu-link">
                 <i class="menu-icon fa-solid fa-palette"></i>
                 <div>Color</div>
@@ -118,6 +124,12 @@
               <a href="{{ route('admin.carts.index') }}" class="menu-link">
                 <i class="menu-icon fa-solid fa-cart-shopping"></i>
                 <div>Cart</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="{{ route('admin.attribute.index') }}" class="menu-link">
+                <i class="menu-icon fa-solid fa-star"></i>
+                <div>Attribute</div>
               </a>
             </li>
           </ul>

@@ -19,9 +19,9 @@
                         <td>{{$carts->getUs() }}</td>
                         <td>{{$carts->getPro() }}</td>
                         <td>{{$carts->quantity}}</td>
-                        <td>
-                            <a href="{{ route('admin.carts.edit',['id'=>$carts->id]) }}" class="btn btn-warning" ><i class="fa-solid fa-pen-to-square"></i></a>
-                            <a onclick="return confirm('Bạn có muốn xoá đơn hàng này không?')" href="{{ route('admin.carts.destroy',['id'=>$carts->id]) }}" class="btn btn-danger" ><i class="fa-solid fa-trash"></i></a>
+                        <td class="fs-3">
+                            <a href="{{ route('admin.carts.edit',['id'=>$carts->id]) }}" class="text-warning" ><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a onclick="return confirm('Bạn có muốn xoá đơn hàng này không?')" href="{{ route('admin.carts.destroy',['id'=>$carts->id]) }}" class="text-danger" ><i class="fa-solid fa-trash"></i></a>
 
                         </td>
                     </tr>
