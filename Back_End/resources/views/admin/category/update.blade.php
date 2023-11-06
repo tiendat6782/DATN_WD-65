@@ -12,6 +12,10 @@
             <div class="text-center mt-3">
                 <button class="btn btn-success" type="submit">Submit</button>
             </div>
+            <div class="fs-3 text-end">
+                <a href="{{ route('admin.categories.index') }}"><i class="fa-solid fa-share me-3 text-warning"></i></a>
+                <a onclick="return confirm('Bạn có muốn xoá sản phẩm này không?')" href="{{ route('admin.categories.destroy',['id'=>$categories->id]) }}" class="text-danger" ><i class="fa-solid fa-trash"></i></a>
+            </div>
         </form>
     </div>
 @endsection

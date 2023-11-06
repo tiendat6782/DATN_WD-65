@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Size;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Attribute;
+use App\Models\Product;
 
 class SizeController extends Controller
 {
@@ -42,7 +44,7 @@ class SizeController extends Controller
     {
         $request->validate(
             [
-                "name" => 'required',
+                "name" => 'required|unique:size',
                 "description" => 'required',
             ],
             [
@@ -82,7 +84,7 @@ class SizeController extends Controller
     {
         $title = "Update Size";
         $size = DB::table('size')->where('id', $id)->first();
-        return view('admin.size.update', compact('size','title'));
+        return view('admin.size.update', compact('size', 'title'));
     }
 
     /**
@@ -96,7 +98,7 @@ class SizeController extends Controller
     {
         $request->validate(
             [
-                "name" => 'required',
+                "name" => 'required|unique:size',
                 "description" => 'required',
             ],
             [
@@ -120,7 +122,23 @@ class SizeController extends Controller
     public function destroy($id)
     {
         if ($id) {
+            // Lấy product_id trước khi xóa
+            $product = Product::whereHas('attributes', function ($query) use ($id) {
+                $query->where('size_id', $id);
+            })->first();
+
+            // Xóa tất cả các bản ghi có 'size_id' tương ứng
+            Attribute::where('size_id', $id)->delete();
+
+            // Cập nhật total_quantity của sản phẩm (nếu có)
+            if ($product) {
+                $product->total_quantity = $product->attributes()->sum('quantity');
+                $product->save();
+            }
+
+            // Xóa bản ghi trong bảng 'size'
             DB::table('size')->where('id', $id)->delete();
+
             return redirect()->route('admin.sizes.index')->with(['msg' => 'Delete Successfully']);
         }
     }

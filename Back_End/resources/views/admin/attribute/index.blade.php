@@ -23,7 +23,7 @@
                     <tr>
                        <td>{{$i}}</td>
                        <td>{{$item->getName()}}</td>
-                       <td>{{$item->getSize()}} $</td>
+                       <td>{{$item->getSize()}}</td>
                        <td>{{$item->getColor()}}</td>                    
                        <td>{{$item->quantity}}</td>                    
                        <td>                      

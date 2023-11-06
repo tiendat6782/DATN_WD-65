@@ -4,6 +4,9 @@
     <div class="container mt-2 ">
         <form action="{{ route('admin.categories.store') }}" method="post" enctype="multipart/form-data">
             @csrf
+            <div class="fs-3">
+                <a href="{{ route('admin.categories.index') }}"><i class="fa-solid fa-share me-3 text-warning"></i></a>
+            </div>
             <div class="mt-2">
                 <label for="">Name</label>
                 @error('name') <span class="text-danger">{{ $message }}</span> @enderror

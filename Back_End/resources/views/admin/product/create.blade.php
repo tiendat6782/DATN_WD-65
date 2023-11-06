@@ -4,6 +4,9 @@
     <div class="container mt-2 ">
         <form action="{{ route('admin.products.store') }}" method="post" enctype="multipart/form-data">
             @csrf
+            <div class="fs-3">
+                <a href="{{ route('admin.products.index') }}"><i class="fa-solid fa-share me-3 text-warning"></i></a>
+            </div>
             <div class="row">
                 <div class="mt-2 col-sm-4">
                     <label for="">Name</label>
