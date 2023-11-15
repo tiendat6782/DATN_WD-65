@@ -22,7 +22,6 @@ class DatabaseSeeder extends Seeder
             CartSeeder::class,
             CategorySeeder::class,
             ReviewSeeder::class,
-            UserSeeder::class,
             OrderSeeder::class,
             OrderItemSeeder::class,
             ReturnRequestSeeder::class,

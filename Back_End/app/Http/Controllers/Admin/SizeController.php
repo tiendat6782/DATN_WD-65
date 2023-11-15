@@ -122,24 +122,16 @@ class SizeController extends Controller
     public function destroy($id)
     {
         if ($id) {
-            // Lấy product_id trước khi xóa
-            $product = Product::whereHas('attributes', function ($query) use ($id) {
-                $query->where('size_id', $id);
-            })->first();
+            // Kiểm tra xem 'size_id' có tồn tại trong bảng 'attributes' hay không
+            $exists = Attribute::where('size_id', $id)->exists();
 
-            // Xóa tất cả các bản ghi có 'size_id' tương ứng
-            Attribute::where('size_id', $id)->delete();
-
-            // Cập nhật total_quantity của sản phẩm (nếu có)
-            if ($product) {
-                $product->total_quantity = $product->attributes()->sum('quantity');
-                $product->save();
+            if ($exists) {
+                return redirect()->back()->with(['msg' => 'Size is associated with attributes. Cannot delete.']);
             }
-
             // Xóa bản ghi trong bảng 'size'
             DB::table('size')->where('id', $id)->delete();
 
-            return redirect()->route('admin.sizes.index')->with(['msg' => 'Delete Successfully']);
+            return redirect()->back()->with(['msg' => 'Delete Successfully']);
         }
     }
 }

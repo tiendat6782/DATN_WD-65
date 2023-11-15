@@ -19,69 +19,12 @@ class UserController extends Controller
     public function index()
     {
         // Lấy ra các users có role_id = 1
-        $users = User::where('role_id', 2)->orderBy('id', 'desc')->paginate(10);
+        $users = User::where('role_id', 1)->orderBy('id', 'desc')->paginate(10);
         $title = "User";
         return view('admin.user.index', compact('users', 'title'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $roles = Role::all();
-        return view('admin.user.create', compact(['roles']));
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        // $request->validate();
-
-        //        if ($request->hasFile('image')) {
-        //            $image = uploadFile('hinh', $request->file('image'));
-        //        }
-        if ($request->hasFile('image')) {
-            $image = uploadFile('hinh', $request->file('image'));
-        }
-
-        DB::table('users')->insert(
-            [
-                "name" => $request->name,
-                "email" => $request->email,
-                "phone_number" => $request->phone_number,
-                "image" => $image,
-                "email_verified_at" => $request->email_verified_at,
-                // "password" => $request->password,
-            ]
-        );
-        return redirect()->route('admin.users.index')->with(['msg' => 'Sucessfully']);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+  
     public function edit($id)
     {
         $roles = Role::all();

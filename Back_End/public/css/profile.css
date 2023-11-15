@@ -1,0 +1,48 @@
+body {
+    margin: 0;
+    /* Đảm bảo không có margin mặc định */
+    padding-top: 68px;
+    padding-bottom: 50px;
+    background-image: url(https://images5.alphacoders.com/771/771281.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* Đảm bảo hình ảnh nền phủ toàn bộ phần tử */
+    background-position: center;
+    /* Căn giữa hình ảnh nền */
+    width: 100vw;
+    /* Chiều rộng 100% của viewport */
+    height: 100vh;
+    /* Chiều cao 100% của viewport */
+}
+
+
+.image-container {
+    position: relative;
+}
+
+.image {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #dfdfdf;
+}
+
+.middle {
+    transition: 0.5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.image-container:hover .image {
+    opacity: 0.3;
+}
+
+.image-container:hover .middle {
+    opacity: 1;
+}

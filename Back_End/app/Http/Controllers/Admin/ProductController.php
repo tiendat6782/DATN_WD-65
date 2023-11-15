@@ -10,6 +10,7 @@ use App\Models\Size;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Attribute;
 
 class ProductController extends Controller
 {
@@ -66,7 +67,7 @@ class ProductController extends Controller
                 "category_id" => $request->category_id,
             ]
         );
-        return redirect()->route('admin.products.index')->with(['msg' => 'Sucessfully']);
+        return redirect()->back()->with(['msg' => 'Sucessfully']);
     }
     public function edit($id)
     {
@@ -127,6 +128,11 @@ class ProductController extends Controller
     public function destroy($id)
     {
         if ($id) {
+            $exists = Attribute::where('color_id', $id)->exists();
+
+            if ($exists) {
+                return redirect()->back()->with(['msg' => 'Color is associated with attributes. Cannot delete.']);
+            }
             $image = DB::table('products')
                 ->where('id', $id)
                 ->select('image')
@@ -134,7 +140,7 @@ class ProductController extends Controller
 
             Storage::delete('/public/' . $image);
             DB::table('products')->where('id', $id)->delete();
-            return redirect()->route('admin.products.index')->with(['msg' => 'Deleted Successfully']);
+            return redirect()->back()->with(['msg' => 'Deleted Successfully']);
         }
     }
 }

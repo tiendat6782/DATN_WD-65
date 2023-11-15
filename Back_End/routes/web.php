@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\CartController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,16 +23,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('layout.index');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('/logout', [AuthController::class, 'logOut'])->name('logout');
+//profile
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profile', [AuthController::class, 'showProfile'])->name('showProfile');
+    Route::post('update-profile', [AuthController::class, 'updateProfile'])->name('updateProfile');
+});
+
+Route::middleware('guest')->group(function () {
+    //đăng kí 
+    Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('showRegisterForm');
+    Route::post('/register-process', [AuthController::class, 'register'])->name('register');
+    //đăng nhập
+    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('showLoginForm');
+    Route::post('/login-proces', [AuthController::class, 'login'])->name('login');
 });
 
 
 
-Route::prefix('admin')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('admin.index');
+Route::prefix('admin')->middleware('adminAuth')->group(function () {
+    Route::get('/', [HomeController::class, 'dashboard'])->name('admin.index');
 
     Route::prefix('products')->controller(ProductController::class)->group(function () {
         Route::get('/', 'index')->name('admin.products.index');
