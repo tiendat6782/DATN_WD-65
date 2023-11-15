@@ -46,7 +46,15 @@
       <link rel="stylesheet" href="{{ asset('assets/vendor/libs/apex-charts/apex-charts.css') }}">
 
     <!-- Page CSS -->
-
+    <style>
+      .image {
+      height: 70px;
+      width: 70px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #dfdfdf;
+      }
+    </style>
     <!-- Helpers -->
     <script src="{{asset('assets/vendor/js/helpers.js')}}"></script>
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
@@ -173,9 +181,9 @@
                   >
                     <div class="avatar avatar-online">
                       <img
-                        src="../assets/img/avatars/1.png"
-                        alt
-                        class="w-px-40 h-auto rounded-circle"
+                        src="{{ asset('storage/'.Auth::user()->image) }}"
+                        alt="avatar"
+                        class="image"
                       />
                     </div>
                   </a>
@@ -186,14 +194,14 @@
                           <div class="flex-shrink-0 me-2 pe-1">
                             <div class="avatar avatar-online">
                               <img
-                                src="../assets/img/avatars/1.png"
-                                alt
-                                class="w-px-40 h-auto rounded-circle"
+                                src="{{ asset('storage/'.Auth::user()->image) }}"
+                                alt="avatar" 
+                                class="image"
                               />
                             </div>
                           </div>
                           <div class="flex-grow-1">
-                            <h6 class="mb-0">John Doe</h6>
+                            <h6 class="mb-0">{{ Auth::user()->name }}</h6>
                             <small class="text-muted">Admin</small>
                           </div>
                         </div>
@@ -208,35 +216,15 @@
                         <span class="align-middle">My Profile</span>
                       </a>
                     </li>
-                    <li>
-                      <a class="dropdown-item" href="#">
-                        <i class="mdi mdi-cog-outline me-1 mdi-20px"></i>
-                        <span class="align-middle">Settings</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="#">
-                        <span class="d-flex align-items-center align-middle">
-                          <i
-                            class="flex-shrink-0 mdi mdi-credit-card-outline me-1 mdi-20px"
-                          ></i>
-                          <span class="flex-grow-1 align-middle ms-1"
-                            >Billing</span
-                          >
-                          <span
-                            class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20"
-                            >4</span
-                          >
-                        </span>
-                      </a>
-                    </li>
+                    
                     <li>
                       <div class="dropdown-divider my-1"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="javascript:void(0);">
+                      <a href="{{ route('logout') }}" class="dropdown-item" href="javascript:void(0);">
                         <i class="mdi mdi-power me-1 mdi-20px"></i>
                         <span class="align-middle">Log Out</span>
+                        
                       </a>
                     </li>
                   </ul>

@@ -80,7 +80,7 @@ class AttributeController extends Controller
         $product = Product::find($request->input('product_id'));
         $product->total_quantity = $product->attributes->sum('quantity');
         $product->save();
-        return redirect()->route('admin.attribute.index')->with(['msg' => 'Update Successfully!']);
+        return redirect()->back('admin.attribute.index')->with(['msg' => 'Update Successfully!']);
     }
     public function destroy($id)
     {
@@ -99,6 +99,6 @@ class AttributeController extends Controller
             }
         }
 
-        return redirect()->route('admin.attribute.index')->with(['msg' => 'Deleted Successfully']);
+        return redirect()->back()->with(['msg' => 'Deleted Successfully']);
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Category;
+use App\Models\Product;
 
 class CategoryController extends Controller
 {
@@ -111,11 +112,21 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function destroy($id)
     {
         if ($id) {
+            // Kiểm tra xem 'size_id' có tồn tại trong bảng 'attributes' hay không
+            $exists = Product::where('category_id', $id)->exists();
+
+            if ($exists) {
+                return redirect()->back()->with(['msg' => 'Category is associated with product. Cannot delete.']);
+            }
+
+            // Xóa tất cả các bản ghi có 'size_id' tương ứng trong bảng 'attributes'
             DB::table('categories')->where('id', $id)->delete();
-            return redirect()->route('admin.categories.index')->with(['msg' => 'Delete Sucessfully']);
+
+            return redirect()->back()->with(['msg' => 'Delete Successfully']);
         }
     }
 }
