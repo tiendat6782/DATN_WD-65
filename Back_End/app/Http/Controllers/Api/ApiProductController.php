@@ -7,7 +7,7 @@ use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class ApiProductController extends Controller
 {
     public function index()
     {
