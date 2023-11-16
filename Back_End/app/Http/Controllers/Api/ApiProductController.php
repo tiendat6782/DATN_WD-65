@@ -14,4 +14,5 @@ class ApiProductController extends Controller
         $product = Product::all();
         return response()->json(['msg' => 'Lấy dữ liệu thành công', 'data' => ProductResource::collection($product)], 200);
     }
+    
 }
