@@ -4,7 +4,7 @@
     <div class="container mt-2 ">
         <form action="{{ route('admin.attribute.update',['id' => $item->id]) }}" method="post">
             @csrf
-           
+
             <div class="row">
                 <div class="mt-2 col-sm-4">
                     <label for="">Product</label>@error('product_id')
@@ -17,7 +17,7 @@
                         @endforeach
                     </select>
                 </div>
-                
+
                 <div class="mt-2 col-sm-4">
                     <label for="">Size</label>@error('size_id')
                     <span class="text-danger">{{ $message }}</span><br>
@@ -31,7 +31,7 @@
                         @endforeach
                     </select>
                 </div>
-                
+
                 <div class="mt-2 col-sm-4">
                     <label for="">Color</label>@error('color_id')
                     <span class="text-danger">{{ $message }}</span><br>
@@ -46,7 +46,7 @@
                     </select>
                 </div>
             </div>
-             
+
             <div class="mt-2">
                 <label for="">Số lượng</label>@error('quantity')
                 <span class="text-danger">{{ $message }}</span><br>
@@ -55,6 +55,10 @@
             </div>
             <div class="text-center mt-3">
             <button class="btn btn-success" type="submit">Submit</button>
+            </div>
+            <div class="fs-3 text-end">
+                <a href="{{ route('admin.attribute.index') }}"><i class="fa-solid fa-share me-3 text-warning"></i></a>
+                <a onclick="return confirm('Bạn có muốn xoá sản phẩm này không?')" href="{{ route('admin.attribute.destroy',['id'=>$item->id]) }}" class="text-danger" ><i class="fa-solid fa-trash"></i></a>
             </div>
         </form>
     </div>

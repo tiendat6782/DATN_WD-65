@@ -4,6 +4,9 @@
     <div class="container mt-2">
         <form action="{{ route('admin.colors.store') }}" method="post" enctype="multipart/form-data">
             @csrf
+            <div class="fs-3">
+                <a href="{{ route('admin.colors.index') }}"><i class="fa-solid fa-share me-3 text-warning"></i></a>
+            </div>
             <div class="row">
                 <div class="mt-2 col-sm-6">
                 <label for="">Name</label>

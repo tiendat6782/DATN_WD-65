@@ -4,7 +4,9 @@
     <div class="container mt-2 ">
         <form action="{{ route('admin.attribute.store') }}" method="post">
             @csrf
-           
+            <div class="fs-3">
+                <a href="{{ route('admin.attribute.index') }}"><i class="fa-solid fa-share me-3 text-warning"></i></a>
+            </div>
             <div class="row">
                 <div class="mt-2 col-sm-4">
                     <label for="">Product</label>
@@ -18,13 +20,13 @@
                         @endforeach
                     </select>
                 </div>
-                
+
                 <div class="mt-2 col-sm-4">
                     <label for="">Size</label>
                         @error('size_id')
                     <span class="text-danger">{{ $message }}</span><br>
                     @enderror
-                    
+
                     <select name="size_id" id="" class="form-select">
                         <option value="">--Chọn giá trị--</option>
                         @foreach ($size as $item)
@@ -32,7 +34,7 @@
                         @endforeach
                     </select>
                 </div>
-                
+
                 <div class="mt-2 col-sm-4">
                     <label for="">Color</label>
                     @error('color_id')
@@ -45,7 +47,7 @@
                         @endforeach
                     </select>
                 </div>
-            </div>   
+            </div>
             <div class="mt-2">
                 <label for="">Số lượng</label>
                     @error('quantity')

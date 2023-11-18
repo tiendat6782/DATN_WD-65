@@ -47,4 +47,18 @@ class Product extends Model
             return "Empty";
         }
     }
+    public function attributes()
+    {
+        return $this->hasMany(Attribute::class, 'product_id');
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::saving(function ($product) {
+            $totalQuantity = $product->attributes()->sum('quantity');
+            $product->total_quantity = $totalQuantity;
+        });
+    }
 }

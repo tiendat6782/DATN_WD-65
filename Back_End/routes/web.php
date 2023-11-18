@@ -4,12 +4,10 @@ use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\CartController;
-use App\Http\Controllers\Admin\GaleryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -105,23 +103,4 @@ Route::prefix('admin')->group(function () {
         Route::post('/update/{id}', 'update')->name('admin.attribute.update');
         Route::get('/destroy/{id}', 'destroy')->name('admin.attribute.destroy');
     });
-    //REVIEW
-    Route::prefix('review')->controller(ReviewController::class)->group(function () {
-        Route::get('/', 'index')->name('admin.review.index');
-        Route::get('create', 'create')->name('admin.reviews.create');
-        Route::post('store', 'store')->name('admin.reviews.store');
-        Route::get('/edit/{id}', 'edit')->name('admin.reviews.edit');
-        Route::post('/update/{id}', 'update')->name('admin.reviews.update');
-        Route::get('/destroy/{id}', 'destroy')->name('admin.reviews.destroy');
-    });
-    //GALERY
-    Route::prefix('galery')->controller(GaleryController::class)->group(function () {
-        Route::get('/', 'index')->name('admin.galery.index');
-        Route::get('create', 'create')->name('admin.galery.create');
-        Route::post('store', 'store')->name('admin.galery.store');
-        Route::get('/edit/{id}', 'edit')->name('admin.galery.edit');
-        Route::post('/update/{id}', 'update')->name('admin.galery.update');
-        Route::get('/destroy/{id}', 'destroy')->name('admin.galery.destroy');
-    });
 });
-

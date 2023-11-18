@@ -47,7 +47,9 @@ class AttributeController extends Controller
         $newAttribute->color_id = $request->input('color_id');
         $newAttribute->quantity = $request->input('quantity');
         $newAttribute->save();
-
+        $product = Product::find($request->input('product_id'));
+        $product->total_quantity = $product->attributes->sum('quantity');
+        $product->save();
         return redirect()->route('admin.attribute.index')->with(['msg' => 'Sucessfully']); // Chuyển hướng sau khi lưu sản phẩm thành công
     }
     public function edit($id)
@@ -75,11 +77,28 @@ class AttributeController extends Controller
             "color_id" => $request->color_id,
             "quantity" => $request->quantity,
         ]);
+        $product = Product::find($request->input('product_id'));
+        $product->total_quantity = $product->attributes->sum('quantity');
+        $product->save();
         return redirect()->route('admin.attribute.index')->with(['msg' => 'Update Successfully!']);
     }
     public function destroy($id)
     {
-        DB::table('attributes')->where('id', $id)->delete();
+        // Lấy sản phẩm biến thể để xác định sản phẩm chứa nó
+        $attribute = Attribute::find($id);
+
+        if ($attribute) {
+            $productId = $attribute->product_id;
+            $attribute->delete();
+
+            // Cập nhật total_quantity của sản phẩm chứa sản phẩm biến thể
+            $product = Product::find($productId);
+            if ($product) {
+                $product->total_quantity = $product->attributes()->sum('quantity');
+                $product->save();
+            }
+        }
+
         return redirect()->route('admin.attribute.index')->with(['msg' => 'Deleted Successfully']);
     }
 }
