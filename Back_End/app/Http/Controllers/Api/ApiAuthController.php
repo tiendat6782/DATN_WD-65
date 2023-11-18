@@ -30,9 +30,8 @@ class ApiAuthController extends Controller
             'password' => bcrypt($request->input('password')),
         ]);
 
-        $token = $user->createToken('MyAppToken')->accessToken;
 
-        return response()->json(['message' => 'Registration successful', 'access_token' => $token], 201);
+        return response()->json(['message' => 'Registration successful'], 201);
     }
 
     public function login(Request $request)
@@ -55,5 +54,46 @@ class ApiAuthController extends Controller
         } else {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
+    }
+    public function logout(Request $request)
+    {
+        $request->user()->token()->revoke();
+
+        return response()->json(['message' => 'Successfully logged out']);
+    }
+
+    public function showProfile()
+    {
+        $user = Auth::user();
+        return response()->json(['user' => $user], 200);
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $userId = Auth::user();
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+            'address' => 'nullable|string|max:255',
+            'phone_number' => 'nullable|string|max:20',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        // Update the user's profile information
+        $user = User::find($userId);
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->address = $request->input('address');
+        $user->phone_number = $request->input('phone_number');
+
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images', 'public');
+            $user->image = $imagePath;
+        }
+
+        $user->save();
+
+        return response()->json(['message' => 'Profile updated successfully', 'user' => $user], 200);
     }
 }

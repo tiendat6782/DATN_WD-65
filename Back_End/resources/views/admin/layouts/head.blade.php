@@ -173,6 +173,7 @@
 
               <ul class="navbar-nav flex-row align-items-center ms-auto">
                 <!-- User -->
+                @auth
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                   <a
                     class="nav-link dropdown-toggle hide-arrow p-0"
@@ -229,6 +230,7 @@
                     </li>
                   </ul>
                 </li>
+                @endauth
                 <!--/ User -->
               </ul>
             </div>
