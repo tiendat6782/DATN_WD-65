@@ -20,3 +20,10 @@ Route::get('/products/{productId}/variants', [ApiAttributeController::class, 'ge
 
 
 Route::get('/product', [ApiProductController::class, 'index']);
+
+
+Route::middleware('auth:api')->group(function () {
+    Route::get('/profile', [ApiAuthController::class, 'showProfile']);
+    Route::put('/profile/update', [ApiAuthController::class, 'updateProfile']);
+});
+

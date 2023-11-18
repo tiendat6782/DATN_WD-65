@@ -43,7 +43,7 @@ Route::middleware('guest')->group(function () {
 
 
 
-Route::prefix('admin')->middleware('adminAuth')->group(function () {
+Route::prefix('admin')->group(function () {
     Route::get('/', [HomeController::class, 'dashboard'])->name('admin.index');
 
     Route::prefix('products')->controller(ProductController::class)->group(function () {
