@@ -9,6 +9,7 @@ class Size extends Model
 {
     use HasFactory;
     protected $table = 'size';
+    protected $fillable = ['name', 'description'];
     public static function boot()
     {
         parent::boot();

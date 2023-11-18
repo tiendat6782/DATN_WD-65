@@ -80,7 +80,7 @@ class AttributeController extends Controller
         $product = Product::find($request->input('product_id'));
         $product->total_quantity = $product->attributes->sum('quantity');
         $product->save();
-        return redirect()->route('admin.attribute.index')->with(['msg' => 'Update Successfully!']);
+        return redirect()->back('admin.attribute.index')->with(['msg' => 'Update Successfully!']);
     }
     public function destroy($id)
     {
@@ -99,31 +99,6 @@ class AttributeController extends Controller
             }
         }
 
-        return redirect()->route('admin.attribute.index')->with(['msg' => 'Deleted Successfully']);
-    }
-    public function edit($id)
-    {
-        $item = Attribute::find($id);
-        $size = Size::all();
-        $product = Product::all();
-        $color = Color::all();
-        return view('admin.attribute.update', compact('item', 'size', 'color', 'product'));
-    }
-    public function update(Request $request, $id)
-    {
-        DB::table('attributes')->where('id', $id)->update([
-
-            "product_id" => $request->product_id,
-            "size_id" => $request->size_id,
-            "color_id" => $request->size_id,
-            "quantity" => $request->quantity,
-        ]);
-        return redirect()->route('admin.attribute.index')->with(['msg' => 'Update Successfully!']);
-    }
-    public function destroy($id)
-    {
-
-        DB::table('attributes')->where('id', $id)->delete();
-        return redirect()->route('admin.attribute.index')->with(['msg' => 'Deleted Successfully' . $id]);
+        return redirect()->back()->with(['msg' => 'Deleted Successfully']);
     }
 }

@@ -12,7 +12,7 @@
             <th>
                 <div class="text-center">
                     <a href="{{ route('admin.attribute.create') }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i></a>
-                </div>
+                </div>            
             </th>
         </thead>
         @isset($items)
@@ -24,9 +24,9 @@
                        <td>{{$i}}</td>
                        <td>{{$item->getName()}}</td>
                        <td>{{$item->getSize()}}</td>
-                       <td>{{$item->getColor()}}</td>
-                       <td>{{$item->quantity}}</td>
-                       <td>
+                       <td>{{$item->getColor()}}</td>                    
+                       <td>{{$item->quantity}}</td>                    
+                       <td>                      
                         <div class="text-center fs-3">
                             <a href="{{ route('admin.attribute.edit',['id'=>$item->id]) }}" class="fs-3 text-warning" ><i class="fa-solid fa-pen-to-square"></i></a>
                             <a onclick="return confirm('Bạn có muốn xoá sản phẩm này không?')" href="{{ route('admin.attribute.destroy',['id'=>$item->id]) }}" class="fs-3 text-danger" ><i class="fa-solid fa-trash"></i></a>

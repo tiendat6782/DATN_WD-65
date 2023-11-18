@@ -129,21 +129,16 @@ class ColorController extends Controller
     public function destroy($id)
     {
         if ($id) {
-            $product = Product::whereHas('attributes', function ($query) use ($id) {
-                $query->where('color_id', $id);
-            })->first();
+            // Kiểm tra xem 'size_id' có tồn tại trong bảng 'attributes' hay không
+            $exists = Attribute::where('color_id', $id)->exists();
 
-            Attribute::where('color_id', $id)->delete();
-
-            if ($product) {
-                $product->total_quantity = $product->attributes()->sum('quantity');
-                $product->save();
+            if ($exists) {
+                return redirect()->back()->with(['msg' => 'Color is associated with attributes. Cannot delete.']);
             }
-
             // Xóa bản ghi trong bảng 'size'
             DB::table('color')->where('id', $id)->delete();
 
-            return redirect()->route('admin.colors.index')->with(['msg' => 'Delete Successfully']);
+            return redirect()->back()->with(['msg' => 'Delete Successfully']);
         }
     }
 }
