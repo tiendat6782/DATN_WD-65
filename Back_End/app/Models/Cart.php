@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cart extends Model
 {
+
+
     use HasFactory;
     protected $table = 'cart';
 
@@ -28,6 +30,21 @@ class Cart extends Model
             return "Empty";
         }
     }
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+    // Cart.php
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
+
+
 
 }
 

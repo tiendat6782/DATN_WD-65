@@ -33,7 +33,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::middleware('guest')->group(function () {
-    //đăng kí 
+    //đăng kí
     Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('showRegisterForm');
     Route::post('/register-process', [AuthController::class, 'register'])->name('register');
     //đăng nhập
@@ -59,6 +59,7 @@ Route::prefix('admin')->group(function () {
     Route::prefix('users')->controller(UserController::class)->group(function () {
         Route::get('/', 'index')->name('admin.users.index');
         Route::get('create', 'create')->name('admin.users.create');
+        Route::get('/show/{id}', 'show')->name('admin.users.show');
         Route::post('store', 'store')->name('admin.users.store');
         Route::get('/edit/{id}', 'edit')->name('admin.users.edit');
         Route::post('/update/{id}', 'update')->name('admin.users.update');
@@ -105,6 +106,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/', 'index')->name('admin.carts.index');
         Route::get('create', 'create')->name('admin.carts.create');
         Route::post('store', 'store')->name('admin.carts.store');
+        Route::get('/carts/show/{id}', 'show')->name('admin.carts.show');
         Route::get('/edit/{id}', 'edit')->name('admin.carts.edit');
         Route::post('/update/{id}', 'update')->name('admin.carts.update');
         Route::get('/destroy/{id}', 'destroy')->name('admin.carts.destroy');

@@ -23,8 +23,16 @@ class UserController extends Controller
         $title = "User";
         return view('admin.user.index', compact('users', 'title'));
     }
-
-  
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+    public function show($id)
+    {
+        $users = User::with('role')->findOrFail($id); // Đảm bảo tồn tại người dùng với ID cung cấp và nạp thông tin về role
+        $title = "User";
+        return view('admin.user.show', compact('users', 'title'));
+    }
     public function edit($id)
     {
         $roles = Role::all();
