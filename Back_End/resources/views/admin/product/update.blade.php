@@ -1,7 +1,11 @@
 @extends('admin.layouts.layout')
 
 @section('contain')
-
+<div>
+    <h2>
+        Update Product
+    </h2>
+</div>
     <div class="container mt-2 ">
         <form action="{{ route('admin.products.update',['id' => $products->id]) }}" method="post" enctype="multipart/form-data">
             @csrf
@@ -44,7 +48,7 @@
             </div>    
             <div class="text-center mt-3">
                 
-            <button class="btn btn-success" type="submit">Update</button>
+            <button class="btn btn-primary" type="submit">Update</button>
             </div>
         </form>
     </div>

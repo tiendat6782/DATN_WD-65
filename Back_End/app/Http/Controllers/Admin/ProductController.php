@@ -67,7 +67,7 @@ class ProductController extends Controller
                 "category_id" => $request->category_id,
             ]
         );
-        return redirect()->back()->with(['msg' => 'Sucessfully']);
+        return redirect()->route('admin.products.index')->with(['msg' => 'Sucessfully']);
     }
     public function edit($id)
     {

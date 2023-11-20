@@ -1,6 +1,11 @@
 @extends('admin.layouts.layout')
 
 @section('contain')
+<div>
+    <h2>
+        Create Size
+    </h2>
+</div>
     <div class="container mt-2 ">
         <form action="{{ route('admin.sizes.store') }}" method="post" enctype="multipart/form-data">
             @csrf
@@ -18,7 +23,7 @@
                 <input type="text" name="description" id="" class="form-control" value="{{ old('description') }}">
             </div>
             <div class="text-center mt-3">
-                <button class="btn btn-success" type="submit">Submit</button>
+                <button class="btn btn-primary" type="submit">Submit</button>
             </div>
         </form>
        

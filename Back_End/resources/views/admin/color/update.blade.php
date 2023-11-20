@@ -1,6 +1,11 @@
 @extends('admin.layouts.layout')
 
 @section('contain')
+<div>
+    <h2>
+        Update Color
+    </h2>
+</div>
     <div class="container mt-2 ">
         <form action="{{ route('admin.colors.update',['id' => $color->id]) }}" method="post" enctype="multipart/form-data">
             @csrf
@@ -21,7 +26,7 @@
                 <input type="text" name="description" id="" class="form-control" value="{{$color->description ?? old('description') }}">
             </div>
             <div class="text-center mt-3">
-                <button class="btn btn-success" type="submit">Submit</button>
+                <button class="btn btn-primary" type="submit">Submit</button>
             </div>
             <div class="fs-3 text-end">
                 <a href="{{ route('admin.colors.index') }}"><i class="fa-solid fa-share me-3 text-warning"></i></a>

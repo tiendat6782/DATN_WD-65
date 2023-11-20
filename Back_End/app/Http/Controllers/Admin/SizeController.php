@@ -98,14 +98,15 @@ class SizeController extends Controller
     {
         $request->validate(
             [
-                "name" => 'required|unique:size',
+                "name" => 'required|unique:size,name,' . $id,
                 "description" => 'required',
             ],
             [
                 "name.required" => 'Not empty. Please enter name',
-                "description.required" => 'Not empty. Please enter name',
+                "description.required" => 'Not empty. Please enter description',
             ]
         );
+
         DB::table('size')->where('id', $id)->update([
             "name" => $request->name,
             "description" => $request->description,

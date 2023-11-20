@@ -101,7 +101,7 @@ class ColorController extends Controller
     {
         $request->validate(
             [
-                "name" => 'required|unique:color',
+                "name" => 'required|unique:color,name,' . $id,
                 "color_code" => 'required',
                 "description" => 'required',
             ],
