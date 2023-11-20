@@ -1,6 +1,11 @@
 @extends('admin.layouts.layout')
 
 @section('contain')
+<div>
+    <h2>
+        Create Category
+    </h2>
+</div>
     <div class="container mt-2 ">
         <form action="{{ route('admin.categories.store') }}" method="post" enctype="multipart/form-data">
             @csrf
@@ -13,7 +18,7 @@
                 <input type="text" name="name" id="" class="form-control" value="{{ old('name') }}">
             </div>
             <div class="text-center mt-3">
-                <button class="btn btn-success" type="submit">Submit</button>
+                <button class="btn btn-primary" type="submit">Submit</button>
             </div>
         </form>
     </div>

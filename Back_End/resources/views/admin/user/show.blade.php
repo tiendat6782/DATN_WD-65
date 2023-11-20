@@ -1,7 +1,11 @@
 @extends('admin.layouts.layout')
 @section('contain')
+<div>
+    <h2>
+        Show User
+    </h2>
+</div>
     <div class="container">
-        <h2>{{ $title }} Details</h2>
 
         <div class="row">
             <div class="col-md-12">

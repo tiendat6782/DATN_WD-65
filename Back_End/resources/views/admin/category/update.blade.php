@@ -1,6 +1,11 @@
 @extends('admin.layouts.layout')
 
 @section('contain')
+<div>
+    <h2>
+        Update Category
+    </h2>
+</div>
     <div class="container mt-2 ">
         <form action="{{ route('admin.categories.update',['id' => $categories->id]) }}" method="post" enctype="multipart/form-data">
             @csrf
@@ -10,7 +15,7 @@
                 <input type="text" name="name" id="" class="form-control" value="{{$categories->name ?? old('name') }}">
             </div>
             <div class="text-center mt-3">
-                <button class="btn btn-success" type="submit">Submit</button>
+                <button class="btn btn-primary" type="submit">Submit</button>
             </div>
             <div class="fs-3 text-end">
                 <a href="{{ route('admin.categories.index') }}"><i class="fa-solid fa-share me-3 text-warning"></i></a>

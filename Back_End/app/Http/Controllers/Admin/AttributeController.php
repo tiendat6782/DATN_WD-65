@@ -55,7 +55,6 @@ class AttributeController extends Controller
     public function edit($id)
     {
         $title = "Update Attribute";
-
         $item = Attribute::find($id);
         $size = Size::all();
         $product = Product::all();

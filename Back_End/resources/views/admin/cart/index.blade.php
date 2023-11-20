@@ -1,12 +1,12 @@
 @extends('admin.layouts.layout')
 
-@section('contain')
-    <div class="container">
-        <h2>{{ $title }} List</h2>
-
-        {{-- Hiển thị số lượng và tổng giá --}}
-        <p>Total Quantity: {{ $totalQuantity }}</p>
-
+@section('contain') 
+<div>
+    <h2>
+        List Cart
+    </h2>
+</div>
+       
 
         <table class="table">
             <thead>
@@ -54,5 +54,4 @@
         <div class="text-center d-flex justify-content-center">
             {{ $carts->links() }}
         </div>
-    </div>
 @endsection

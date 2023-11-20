@@ -1,6 +1,9 @@
 @extends('admin.layouts.layout')
 
 @section('contain')
+<div>
+    <h2>Category List</h2>
+</div>
     <table class="table">
         <thead>
         <th>ID</th>

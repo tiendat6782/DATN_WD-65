@@ -1,6 +1,7 @@
 @extends('admin.layouts.layout')
 
 @section('contain')
+
     <div class="container mt-2 ">
         <form action="{{ route('admin.users.update',['id' => $users->id]) }}" method="post" enctype="multipart/form-data">
             @csrf
