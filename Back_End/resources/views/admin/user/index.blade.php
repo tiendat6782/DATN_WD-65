@@ -22,20 +22,20 @@
                         <td>{{$item->name}}</td>
                         <td>{{$item->email}}</td>
                         <td>{{$item->phone_number}}</td>
-                     
+
                         <td>
                             <img src="{{ asset('storage/'.$item->image) }}" width="200px" alt="">
                             </td>
-                    
+
                         <td class="fs-3">
-                            <a href="" class="text-warning" ><i class="fa-solid fa-eye"></i></i></a>
+                            <a href="{{ route('admin.users.show',['id'=>$item->id]) }}" class="text-warning" ><i class="fa-solid fa-eye"></i></a>
                             <a onclick="return confirm('Bạn có muốn xoá user này không?')" href="{{ route('admin.users.destroy',['id'=>$item->id]) }}" class="text-danger" ><i class="fa-solid fa-trash"></i></a>
 
                         </td>
                     </tr>
                     @php $i++ @endphp
                 @endforeach
-              
+
             @else
 
             @endif

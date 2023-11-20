@@ -50,8 +50,8 @@
                 <input type="file" id="image" name="image" accept="image/*" onchange="previewImage()" class="form-control" >
                 <img id="preview" src="" alt="Image Preview"  class="img-thumbnail" style="display:none; max-width: 300px; max-height: 300px;">
             </div>
-             
-          
+
+
             <div class="text-center mt-3">
             <button class="btn btn-success" type="submit">Submit</button>
             </div>

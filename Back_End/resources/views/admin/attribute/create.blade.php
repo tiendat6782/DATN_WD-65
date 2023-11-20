@@ -31,13 +31,13 @@
                         @endforeach
                     </select>
                 </div>
-                
+
                 <div class="mt-2 col-sm-4">
                     <label for="">Size</label>
                         @error('size_id')
                     <span class="text-danger">{{ $message }}</span><br>
                     @enderror
-                    
+
                     <select name="size_id" id="" class="form-select">
                         <option value="">--Chọn giá trị--</option>
                         @foreach ($size as $item)
@@ -45,7 +45,7 @@
                         @endforeach
                     </select>
                 </div>
-                
+
                 <div class="mt-2 col-sm-4">
                     <label for="">Color</label>
                     @error('color_id')
@@ -58,7 +58,7 @@
                         @endforeach
                     </select>
                 </div>
-            </div>   
+            </div>
             <div class="mt-2">
                 <label for="">Số lượng</label>
                     @error('quantity')

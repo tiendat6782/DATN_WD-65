@@ -61,4 +61,8 @@ class Product extends Model
             $product->total_quantity = $totalQuantity;
         });
     }
+    public function carts()
+    {
+        return $this->hasMany(Cart::class);
+    }
 }

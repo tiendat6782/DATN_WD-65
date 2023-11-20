@@ -15,11 +15,11 @@ class AdminAuthMiddleware
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next)
-    {
-        if (Auth::user()->role_id === 0) {
-            return $next($request);
-        } else
-            return redirect()->route('home')->with(['msg' => 'You do not have access']);
-    }
+//    public function handle(Request $request, Closure $next)
+//    {
+//        if (Auth::user()->role_id === 0) {
+//            return $next($request);
+//        } else
+//            return redirect()->route('home')->with(['msg' => 'You do not have access']);
+//    }
 }
